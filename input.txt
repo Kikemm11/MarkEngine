@@ -1,0 +1,5 @@
+@title<size>: some title
+@author<font, size, at>: some author @date<format1>: dd-mm-aaaa
+@link>https://example.com
+\
+~
