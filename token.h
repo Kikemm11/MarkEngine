@@ -18,7 +18,7 @@ typedef enum
     TOKEN_HYPHEN = 270,
     TOKEN_SLASH = 271,
     TOKEN_WILDCARD = 272,
-    TOKEN_QUOTATION_MARK = 273,
+    TOKEN_IDENTIFIER = 273,
     TOKEN_WAVE = 274,
     TOKEN_SCAPE = 275,
     TOKEN_UNDEFINED = 276
@@ -46,6 +46,6 @@ inline const char* to_str(token_t t)
         case TOKEN_WAVE: return "WAVE";
         case TOKEN_WILDCARD: return "WILDCARD";
         case TOKEN_SCAPE: return "SCAPE";
-        case TOKEN_QUOTATION_MARK: return "QUOTATION_MARK";
+        case TOKEN_IDENTIFIER: return "TOKEN_IDENTIFIER";
     }
 }

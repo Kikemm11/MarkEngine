@@ -1,12 +1,22 @@
 %{
 #include "token.h"
+#include <stdio.h>
+
+int counter = 0;
 %}
 
-TEXT       [a-zA-Z0-9 \t\n+¿\?&¡!]+
+LINEBREAK  \n
+SPACE      [\t ]+ 
+TEXT       \'[a-zA-Z0-9 \n\t+¿\?&¡!\"]+\'
+IDENTIFIER [a-zA-Z0-9 ]+
 UNDEFINED  .
 
 %%
+
 {TEXT}       { return TOKEN_TEXT; }
+{IDENTIFIER} {return TOKEN_IDENTIFIER;}
+{LINEBREAK}  {++counter;}
+{SPACE}      {}
 ":"          { return TOKEN_DEF; }
 "<"          { return TOKEN_L_TAG; }
 ">"          { return TOKEN_R_TAG; }
@@ -21,10 +31,10 @@ UNDEFINED  .
 "-"          { return TOKEN_HYPHEN; }
 "/"          { return TOKEN_SLASH; }
 "*"          { return TOKEN_WILDCARD; }
-"\""         { return TOKEN_QUOTATION_MARK; }
 "~"          { return TOKEN_WAVE; }
 "\\"         { return TOKEN_SCAPE; }
-{UNDEFINED}  { return TOKEN_UNDEFINED; }
+{UNDEFINED}  {  printf("Unexpected token at line: %d", counter);
+                return TOKEN_UNDEFINED; }
 
 
 %%

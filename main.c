@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #include "token.h"
 
 extern FILE* yyin;
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
         printf("Could not open %s\n", argv[1]);
         exit(1);
     }
-
+    
     while (1)
     {
         token_t t = yylex();

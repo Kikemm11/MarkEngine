@@ -1,5 +1,9 @@
-@title<size>: some title
-@author<font, size, at>: some author @date<format1>: dd-mm-aaaa
-@link>https://example.com
-\
-~
+@paragraph<font, size, at>: 'some 
+
+1
+2
+3
+4
+5
+subtitle'
+*some text*
