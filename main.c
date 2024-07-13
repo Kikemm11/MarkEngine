@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
         if (t == TOKEN_EOF)
         {
-            printf("End of file\n");
+            printf("<-End of file->\n");
             break;
         }
 
@@ -46,12 +46,9 @@ int main(int argc, char* argv[])
         {
             printf("Token: %s value: %s\n", to_str(t), yytext);
         }
-        else
-        {
-            printf("Unexpected token: %s\n", yytext);
-        }
         
     }
 
     return 0;
+
 }

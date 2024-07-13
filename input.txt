@@ -1,9 +1,7 @@
-@paragraph<font, size, at>: 'some 
+'line 1
 
-1
-2
-3
-4
-5
-subtitle'
-*some text*
+
+line 2'
+@
+'line 3'
+^
