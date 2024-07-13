@@ -8,8 +8,6 @@
 
 void clean_TOKEN_TEXT(char* token, int leng, int* counter)
 {
-    printf("Old: %s\n",token);
-
     for (int i = 1; i < leng - 1; ++i)
     {
         if (token[i] == '\n')
