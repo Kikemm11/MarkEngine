@@ -1,7 +1,7 @@
-'line 1
-
-
-line 2'
-@
-'line 3'
+@paragraph:
+'
+Hola Majo como estas
+Prueba
+'
+@author: 'yo'
 ^

@@ -22,8 +22,8 @@ void clean_TOKEN_TEXT(char* token, int leng, int* counter)
 %}
 
  
-TEXT       \'[a-zA-Z0-9 \n\t+¿\?&¡!\"]+\'
-IDENTIFIER [a-zA-Z0-9 ]+
+TEXT       \'[a-zA-Z0-9 \n\t+¿\?&¡!\"]*\'
+IDENTIFIER [a-zA-Z0-9]+
 LINEBREAK  \n
 SPACE      [\t ]+
 UNDEFINED  .
