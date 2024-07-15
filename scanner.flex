@@ -6,36 +6,39 @@
 
 //Sanitize TOKEN_TEXT removing its single quotes and keep track of the linebreaks inside
 
-void clean_TOKEN_TEXT(char* token, int leng, int* counter)
-{
-    for (int i = 1; i < leng - 1; ++i)
-    {
-        if (token[i] == '\n')
-        {
-            ++(*counter);
-        }
-        token[i - 1] = token[i];
-    }
-    token[leng - 2] = '\0';
-}
+
 
 %}
 
- 
-TEXT       \'[a-zA-Z0-9 \n\t+¿\?&¡!\"]*\'
-IDENTIFIER [a-zA-Z0-9]+
+
+TEXT       [a-zA-Z0-9 \n\t+¿\?&¡!\"]*
+PARAMETER [a-zA-Z0-9]+
 LINEBREAK  \n
 SPACE      [\t ]+
 UNDEFINED  .
 
+
 %%
 
-{TEXT}       { clean_TOKEN_TEXT(yytext, yyleng, &counter);
+"paragraphs"       { return TOKEN_PARAGRAPH; }
+"titles"           {return TOKEN_TITLES; }
+"date"             {return TOKEN_DATE; }
+"subtitles"        {return TOKEN_SUBTITLES; }
+"headings"         {return TOKEN_HEADINGS; }
+"chapter"          {return TOKEN_CHAPTER; }
+"abstract"         {return TOKEN_ABSTRACT; }
+"author"           {return TOKEN_AUTHOR; }
+"list"             {return TOKEN_LIST; }
+"link"             {return TOKEN_LINK; }
+"font"             {return TOKEN_FONT; }
+"table"            {return TOKEN_TABLE; }
+"diagram"          {return TOKEN_DIAGRAM; }
+
+
+{PARAMETER}  { return TOKEN_PARAMETER; }
+{TEXT}       { 
                return TOKEN_TEXT; 
              }
-{IDENTIFIER} { return TOKEN_IDENTIFIER; }
-{LINEBREAK}  { ++counter;}
-{SPACE}      {}
 ":"          { return TOKEN_DEF; }
 "<"          { return TOKEN_L_TAG; }
 ">"          { return TOKEN_R_TAG; }
@@ -52,8 +55,10 @@ UNDEFINED  .
 "*"          { return TOKEN_WILDCARD; }
 "~"          { return TOKEN_WAVE; }
 "\\"         { return TOKEN_SCAPE; }
+
 {UNDEFINED}  { printf("Unexpected token '%s' at line: %d\n",yytext, counter); }
 
 %%
 
 int yywrap() { return 1; }
+

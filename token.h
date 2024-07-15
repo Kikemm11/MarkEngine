@@ -6,7 +6,7 @@ typedef enum
 {
     TOKEN_EOF = 0,
     TOKEN_TEXT = 258,
-    TOKEN_IDENTIFIER = 259,
+    TOKEN_PARAMETER = 259,
     TOKEN_DEF = 260,
     TOKEN_L_TAG = 261,
     TOKEN_R_TAG = 262,
@@ -23,7 +23,20 @@ typedef enum
     TOKEN_WILDCARD = 273,
     TOKEN_WAVE = 274,
     TOKEN_SCAPE = 275,
-    TOKEN_UNDEFINED = 276
+    TOKEN_UNDEFINED = 276,
+    TOKEN_PARAGRAPH = 277,
+    TOKEN_TITLES = 278,
+    TOKEN_DATE = 279,
+    TOKEN_SUBTITLES = 280,
+    TOKEN_HEADINGS = 281, 
+    TOKEN_CHAPTER = 282,
+    TOKEN_ABSTRACT = 283,
+    TOKEN_AUTHOR = 284,
+    TOKEN_LIST = 285,
+    TOKEN_LINK = 286,
+    TOKEN_FONT = 287,
+    TOKEN_TABLE = 288,
+    TOKEN_DIAGRAM = 289,
     }
 token_t;
 
@@ -35,7 +48,7 @@ inline const char* to_str(token_t t)
     switch (t)
     {
         case TOKEN_TEXT: return "TEXT";
-        case TOKEN_IDENTIFIER: return "TOKEN_IDENTIFIER";
+        case TOKEN_PARAMETER: return "PARAMETER";
         case TOKEN_DEF: return "DEF";
         case TOKEN_L_TAG: return "L_TAG";
         case TOKEN_R_TAG: return "R_TAG";
@@ -49,8 +62,22 @@ inline const char* to_str(token_t t)
         case TOKEN_UNDERSCORE: return "UNDERSCORE";
         case TOKEN_HYPHEN: return "HYPHEN";
         case TOKEN_SLASH: return "SLASH";
-        case TOKEN_WAVE: return "WAVE";
+        case TOKEN_WAVE: return "WAVE";        
         case TOKEN_WILDCARD: return "WILDCARD";
         case TOKEN_SCAPE: return "SCAPE";
+        case TOKEN_PARAGRAPH: return "PARAGRAPH";
+        case TOKEN_TITLES: return "TITLES";
+        case TOKEN_DATE: return "DATE";
+        case TOKEN_SUBTITLES: return "SUBTITLES";
+        case TOKEN_HEADINGS: return "HEADINGS";
+        case TOKEN_CHAPTER: return "CHAPTER";
+        case TOKEN_ABSTRACT: return "ABSTRACT";
+        case TOKEN_AUTHOR: return "AUTHOR";
+        case TOKEN_LIST: return "LIST";
+        case TOKEN_LINK: return "LINK";
+        case TOKEN_FONT: return "FONT";
+        case TOKEN_TABLE: return "TABLE";
+        case TOKEN_DIAGRAM: return "DIAGRAM";
+
     }
 }
