@@ -1,7 +1,5 @@
-@paragraph:
-'
-Hola Majo como estas
+@paragraph: Hola Majo como estas
 Prueba
-'
-@author: 'yo'
-^
+@author: ivan
+@paragraph: Linea 1
+Linea 2
