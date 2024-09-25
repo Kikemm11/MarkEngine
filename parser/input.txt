@@ -1,3 +1,2 @@
-@list: 1,23
-
-Hola *Como* estas
+@title: normal *bold* normal _italic_ normal
+@author: Ivan
