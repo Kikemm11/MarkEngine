@@ -29,6 +29,7 @@ int yyerror(const char*);
 %token TOKEN_R_PAREN
 %token TOKEN_L_BRACE
 %token TOKEN_R_BRACE
+%token TOKEN_NUMBER
 %token TOKEN_COMMA
 %token TOKEN_AT
 %token TOKEN_UNDERSCORE
@@ -40,6 +41,7 @@ int yyerror(const char*);
 
 
 %%
+
 program : expr;
 
 expr : expr expr
@@ -57,11 +59,13 @@ expr : expr expr
      | foot
      ;
 
+
+
 title : TOKEN_AT TOKEN_TITLE TOKEN_DEF text;
 
 author : TOKEN_AT TOKEN_AUTHOR TOKEN_DEF text; 
 
-date : TOKEN_AT TOKEN_DATE TOKEN_DEF text;
+date : TOKEN_AT TOKEN_DATE TOKEN_DEF TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER;
 
 subtitle : TOKEN_AT TOKEN_SUBTITLE TOKEN_DEF text; 
 
@@ -80,6 +84,8 @@ image : TOKEN_AT TOKEN_IMG TOKEN_DEF text;
 quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text TOKEN_COMMA text TOKEN_COMMA text TOKEN_R_BRACE; 
 
 foot : TOKEN_AT TOKEN_FOOT TOKEN_DEF text;
+
+
 
 text : text text
      | TOKEN_TEXT

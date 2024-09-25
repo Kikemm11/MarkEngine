@@ -3,6 +3,7 @@
 %}
 
 
+NUMBER     [0-9]+
 TEXT       [a-zA-Z0-9 \n\t+¿\?&¡!\".,;]+
 LINEBREAK  \n
 SPACE      [\t ]+
@@ -29,6 +30,8 @@ UNDEFINED  .
 "foot"             {return TOKEN_FOOT; }
 
 
+","                { return TOKEN_COMMA; }
+{NUMBER}           { return TOKEN_NUMBER; }
 {TEXT}             { return TOKEN_TEXT; }
 ":"                { return TOKEN_DEF; }
 "<"                { return TOKEN_L_TAG; }
@@ -37,7 +40,6 @@ UNDEFINED  .
 ")"                { return TOKEN_R_PAREN; }
 "{"                { return TOKEN_L_BRACE; }
 "}"                { return TOKEN_R_BRACE; }
-","                { return TOKEN_COMMA; }
 "@"                { return TOKEN_AT; }
 "_"                { return TOKEN_UNDERSCORE; }
 "-"                { return TOKEN_HYPHEN; }

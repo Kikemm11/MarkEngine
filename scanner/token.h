@@ -13,7 +13,8 @@ typedef enum
     TOKEN_R_PAREN = 263,
     TOKEN_L_BRACE = 264,
     TOKEN_R_BRACE = 265,
-    TOKEN_COMMA = 266,
+    TOKEN_NUMBER = 266,
+    TOKEN_COMMA = 267,
     TOKEN_AT = 268,
     TOKEN_UNDERSCORE = 269,
     TOKEN_HYPHEN = 270,
@@ -56,6 +57,7 @@ inline const char* to_str(token_t t)
         case TOKEN_R_PAREN: return "R_PAREN";
         case TOKEN_L_BRACE: return "L_BRACE";
         case TOKEN_R_BRACE: return "R_BRACE";
+        case TOKEN_NUMBER: return "NUMBER";
         case TOKEN_COMMA: return "COMMA";
         case TOKEN_AT: return "AT";
         case TOKEN_UNDERSCORE: return "UNDERSCORE";
