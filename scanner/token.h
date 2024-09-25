@@ -13,8 +13,7 @@ typedef enum
     TOKEN_R_PAREN = 263,
     TOKEN_L_BRACE = 264,
     TOKEN_R_BRACE = 265,
-    TOKEN_DOT = 266,
-    TOKEN_COMMA = 267,
+    TOKEN_COMMA = 266,
     TOKEN_AT = 268,
     TOKEN_UNDERSCORE = 269,
     TOKEN_HYPHEN = 270,
@@ -26,16 +25,19 @@ typedef enum
     TOKEN_TITLE = 276,
     TOKEN_DATE = 277,
     TOKEN_SUBTITLE = 278,
-    TOKEN_HEADING = 279, 
-    TOKEN_CHAPTER = 280,
-    TOKEN_ABSTRACT = 281,
-    TOKEN_AUTHOR = 282,
-    TOKEN_LIST = 283,
-    TOKEN_LINK = 284,
-    TOKEN_FONT = 285,
-    TOKEN_TABLE = 286,
-    TOKEN_DIAGRAM = 287,
-    TOKEN_UNDEFINED = 288
+    TOKEN_CHAPTER = 279,
+    TOKEN_ABSTRACT = 280,
+    TOKEN_AUTHOR = 281,
+    TOKEN_LIST = 282,
+    TOKEN_LINK = 283,
+    TOKEN_FONT = 284,
+    TOKEN_TABLE = 285,
+    TOKEN_DIAGRAM = 286,
+    TOKEN_INDEX = 287,
+    TOKEN_IMG = 288,
+    TOKEN_QUOTE = 289,
+    TOKEN_FOOT = 290,
+    TOKEN_UNDEFINED = 291
     }
 token_t;
 
@@ -54,7 +56,6 @@ inline const char* to_str(token_t t)
         case TOKEN_R_PAREN: return "R_PAREN";
         case TOKEN_L_BRACE: return "L_BRACE";
         case TOKEN_R_BRACE: return "R_BRACE";
-        case TOKEN_DOT: return "DOT";
         case TOKEN_COMMA: return "COMMA";
         case TOKEN_AT: return "AT";
         case TOKEN_UNDERSCORE: return "UNDERSCORE";
@@ -64,10 +65,9 @@ inline const char* to_str(token_t t)
         case TOKEN_WILDCARD: return "WILDCARD";
         case TOKEN_SCAPE: return "SCAPE";
         case TOKEN_PARAGRAPH: return "PARAGRAPH";
-        case TOKEN_TITLE: return "TITLES";
+        case TOKEN_TITLE: return "TITLE";
         case TOKEN_DATE: return "DATE";
-        case TOKEN_SUBTITLE: return "SUBTITLES";
-        case TOKEN_HEADING: return "HEADINGS";
+        case TOKEN_SUBTITLE: return "SUBTITLE";
         case TOKEN_CHAPTER: return "CHAPTER";
         case TOKEN_ABSTRACT: return "ABSTRACT";
         case TOKEN_AUTHOR: return "AUTHOR";
@@ -76,5 +76,9 @@ inline const char* to_str(token_t t)
         case TOKEN_FONT: return "FONT";
         case TOKEN_TABLE: return "TABLE";
         case TOKEN_DIAGRAM: return "DIAGRAM";
+        case TOKEN_INDEX: return "INDEX";
+        case TOKEN_IMG: return "IMG";
+        case TOKEN_QUOTE: return "QUOTE";
+        case TOKEN_FOOT: return "FOOT";
     }
 }

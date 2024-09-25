@@ -1,5 +1,0 @@
-@paragraph: Hola Majo como estas
-Prueba
-@author: ivan
-@paragraph: Linea 1
-Linea 2
