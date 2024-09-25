@@ -789,7 +789,7 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 15 "scanner.flex"
-{return TOKEN_TITLES; }
+{return TOKEN_TITLE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -799,12 +799,12 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 17 "scanner.flex"
-{return TOKEN_SUBTITLES; }
+{return TOKEN_SUBTITLE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 18 "scanner.flex"
-{return TOKEN_HEADINGS; }
+{return TOKEN_HEADING; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP

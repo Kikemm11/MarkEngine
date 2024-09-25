@@ -12,10 +12,10 @@ UNDEFINED  .
 %%
 
 "paragraph"       { return TOKEN_PARAGRAPH; }
-"title"           {return TOKEN_TITLES; }
+"title"           {return TOKEN_TITLE; }
 "date"             {return TOKEN_DATE; }
-"subtitle"        {return TOKEN_SUBTITLES; }
-"heading"         {return TOKEN_HEADINGS; }
+"subtitle"        {return TOKEN_SUBTITLE; }
+"heading"         {return TOKEN_HEADING; }
 "chapter"          {return TOKEN_CHAPTER; }
 "abstract"         {return TOKEN_ABSTRACT; }
 "author"           {return TOKEN_AUTHOR; }

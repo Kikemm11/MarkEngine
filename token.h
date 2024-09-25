@@ -23,10 +23,10 @@ typedef enum
     TOKEN_WAVE = 273,
     TOKEN_SCAPE = 274,
     TOKEN_PARAGRAPH = 275,
-    TOKEN_TITLES = 276,
+    TOKEN_TITLE = 276,
     TOKEN_DATE = 277,
-    TOKEN_SUBTITLES = 278,
-    TOKEN_HEADINGS = 279, 
+    TOKEN_SUBTITLE = 278,
+    TOKEN_HEADING = 279, 
     TOKEN_CHAPTER = 280,
     TOKEN_ABSTRACT = 281,
     TOKEN_AUTHOR = 282,
@@ -64,10 +64,10 @@ inline const char* to_str(token_t t)
         case TOKEN_WILDCARD: return "WILDCARD";
         case TOKEN_SCAPE: return "SCAPE";
         case TOKEN_PARAGRAPH: return "PARAGRAPH";
-        case TOKEN_TITLES: return "TITLES";
+        case TOKEN_TITLE: return "TITLES";
         case TOKEN_DATE: return "DATE";
-        case TOKEN_SUBTITLES: return "SUBTITLES";
-        case TOKEN_HEADINGS: return "HEADINGS";
+        case TOKEN_SUBTITLE: return "SUBTITLES";
+        case TOKEN_HEADING: return "HEADINGS";
         case TOKEN_CHAPTER: return "CHAPTER";
         case TOKEN_ABSTRACT: return "ABSTRACT";
         case TOKEN_AUTHOR: return "AUTHOR";
