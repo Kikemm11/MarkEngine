@@ -30,6 +30,7 @@ int yyerror(const char*);
 %token TOKEN_L_BRACE
 %token TOKEN_R_BRACE
 %token TOKEN_NUMBER
+%token TOKEN_IMG_PATH
 %token TOKEN_COMMA
 %token TOKEN_AT
 %token TOKEN_UNDERSCORE
@@ -54,6 +55,8 @@ expr : expr expr
      | index
      | paragraph
      | list
+     | table
+     | diagram
      | image
      | quote
      | foot
@@ -79,11 +82,15 @@ paragraph : TOKEN_AT TOKEN_PARAGRAPH TOKEN_DEF text;
 
 list : TOKEN_AT TOKEN_LIST TOKEN_DEF text;
 
-image : TOKEN_AT TOKEN_IMG TOKEN_DEF text; 
+image : TOKEN_AT TOKEN_IMG TOKEN_DEF TOKEN_IMG_PATH; 
 
-quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text TOKEN_COMMA text TOKEN_COMMA text TOKEN_R_BRACE; 
+quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text TOKEN_SLASH text TOKEN_SLASH text TOKEN_R_BRACE; 
 
 foot : TOKEN_AT TOKEN_FOOT TOKEN_DEF text;
+
+table : TOKEN_AT TOKEN_TABLE TOKEN_DEF TOKEN_L_TAG text TOKEN_R_TAG row TOKEN_AT;
+
+diagram : TOKEN_AT TOKEN_DIAGRAM TOKEN_DEF item TOKEN_AT
 
 
 
@@ -100,6 +107,16 @@ italic : TOKEN_UNDERSCORE TOKEN_TEXT TOKEN_UNDERSCORE;
 
 underline : TOKEN_WAVE TOKEN_TEXT TOKEN_WAVE;
 
+
+
+row : row row
+    | TOKEN_L_PAREN text TOKEN_R_PAREN
+    ; 
+
+item : item item
+     | text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
+     | text TOKEN_HYPHEN TOKEN_R_TAG text
+     ;
 %%
 
 

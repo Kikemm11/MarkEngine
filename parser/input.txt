@@ -1,3 +1,5 @@
-@title: normal *bold* normal _italic_ normal
-@author:   1Ivan2
-@date:12-12-2024
+@diagram: 
+    node1 -> node2 (info)
+    node1 -> node3
+    node3 -> node4 (info)
+@

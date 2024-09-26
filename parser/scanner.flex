@@ -4,8 +4,9 @@
 
 
 NUMBER     [0-9]+
+IMG_PATH   [a-zA-Z0-9_/]+\.[a-z]+
 TEXT       [a-zA-Z0-9 \n\t+¿\?&¡!\".,;]+
-LINEBREAK  \n
+LINEBREAK  [\n]+
 SPACE      [\t ]+
 UNDEFINED  .
 
@@ -29,9 +30,11 @@ UNDEFINED  .
 "quote"            {return TOKEN_QUOTE; }
 "foot"             {return TOKEN_FOOT; }
 
-
+{LINEBREAK}        {}
+{SPACE}            {}
 ","                { return TOKEN_COMMA; }
 {NUMBER}           { return TOKEN_NUMBER; }
+{IMG_PATH}         { return TOKEN_IMG_PATH;}
 {TEXT}             { return TOKEN_TEXT; }
 ":"                { return TOKEN_DEF; }
 "<"                { return TOKEN_L_TAG; }
