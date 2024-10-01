@@ -1,1 +1,5 @@
-Hola, como
+@diagram: 
+node1 -> node2 (info)
+node1 -> node3 (info)
+node3 -> node4 (info)
+@

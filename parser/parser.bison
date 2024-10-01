@@ -43,10 +43,15 @@ int yyerror(const char*);
 
 %%
 
-program : expr;
+program : expr_list
+        |
+        ;
 
-expr : expr expr
-     | title
+expr_list : expr
+          | expr_list expr
+          ;
+
+expr : title
      | author
      | date
      | subtitle
@@ -62,40 +67,41 @@ expr : expr expr
      | foot
      ;
 
+title : TOKEN_AT TOKEN_TITLE TOKEN_DEF text_list;
 
-
-title : TOKEN_AT TOKEN_TITLE TOKEN_DEF text;
-
-author : TOKEN_AT TOKEN_AUTHOR TOKEN_DEF text; 
+author : TOKEN_AT TOKEN_AUTHOR TOKEN_DEF text_list; 
 
 date : TOKEN_AT TOKEN_DATE TOKEN_DEF TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER;
 
-subtitle : TOKEN_AT TOKEN_SUBTITLE TOKEN_DEF text; 
+subtitle : TOKEN_AT TOKEN_SUBTITLE TOKEN_DEF text_list; 
 
-chapter : TOKEN_AT TOKEN_CHAPTER TOKEN_DEF text;
+chapter : TOKEN_AT TOKEN_CHAPTER TOKEN_DEF text_list;
 
-abstract : TOKEN_AT TOKEN_ABSTRACT TOKEN_DEF text; 
+abstract : TOKEN_AT TOKEN_ABSTRACT TOKEN_DEF text_list; 
 
 index : TOKEN_AT TOKEN_INDEX TOKEN_DEF;
 
-paragraph : TOKEN_AT TOKEN_PARAGRAPH TOKEN_DEF text; 
+paragraph : TOKEN_AT TOKEN_PARAGRAPH TOKEN_DEF text_list; 
 
-list : TOKEN_AT TOKEN_LIST TOKEN_DEF text;
+list : TOKEN_AT TOKEN_LIST TOKEN_DEF text_list;
 
 image : TOKEN_AT TOKEN_IMG TOKEN_DEF TOKEN_IMG_PATH; 
 
-quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text TOKEN_SLASH text TOKEN_SLASH text TOKEN_R_BRACE; 
+quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH text_list TOKEN_R_BRACE; 
 
-foot : TOKEN_AT TOKEN_FOOT TOKEN_DEF text;
+foot : TOKEN_AT TOKEN_FOOT TOKEN_DEF text_list;
 
-table : TOKEN_AT TOKEN_TABLE TOKEN_DEF TOKEN_L_TAG text TOKEN_R_TAG row TOKEN_AT;
+table : TOKEN_AT TOKEN_TABLE TOKEN_DEF TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
 
-diagram : TOKEN_AT TOKEN_DIAGRAM TOKEN_DEF item TOKEN_AT
+diagram : TOKEN_AT TOKEN_DIAGRAM TOKEN_DEF items TOKEN_AT
 
 
 
-text : text text
-     | TOKEN_TEXT
+text_list : text
+     | text_list text
+     ;
+
+text : TOKEN_TEXT
      | bold
      | italic
      | underline
@@ -109,14 +115,22 @@ underline : TOKEN_WAVE TOKEN_TEXT TOKEN_WAVE;
 
 
 
-row : row row
-    | TOKEN_L_PAREN text TOKEN_R_PAREN
-    ; 
+rows : row 
+     | rows row
+     ;
 
-item : item item
-     | text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
+row : TOKEN_L_PAREN text TOKEN_R_PAREN;
+
+
+
+items : item
+      | items item
+      ;  
+
+item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
      | text TOKEN_HYPHEN TOKEN_R_TAG text
      ;
+
 %%
 
 
