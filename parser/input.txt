@@ -1,5 +1,34 @@
-@diagram: 
-    node1 -> node2 (info)
-    node1 -> node3
-    node3 -> node4 (info)
+@title: Hola *Hola* _Hola_ ~Hola~
+
+@author: Ivan Maldonado
+
+@subtitle: some subtitle
+
+@chapter: some chapter
+
+@abstract: some text
+
+@index:
+
+@paragraph: some subtitle
+
+@list: some text1, some text2
+
+@img: /example/path/img.jpg
+
+@quote:{Some quote/Some author/ 1889}
+
+@foot: some text
+
+@table:
+<column1,column2>
+(value1,value2)
+(value3,value4)
 @
+
+@diagram: 
+node1 -> node2 (info)
+node1 -> node3 (info)
+node3 -> node4 (info)
+@
+
