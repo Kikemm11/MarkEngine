@@ -38,7 +38,9 @@ int yyerror(const char*);
 %token TOKEN_SLASH
 %token TOKEN_WILDCARD
 %token TOKEN_WAVE
-%token TOKEN_SCAPE
+%token TOKEN_ENTER
+%token TOKEN_LINEBREAK
+%token TOKEN_DATE_FORMAT
 
 
 %%
@@ -65,35 +67,38 @@ expr : title
      | image
      | quote
      | foot
+     | linebreak
      ;
 
-title : TOKEN_AT TOKEN_TITLE TOKEN_DEF text_list;
+title : TOKEN_TITLE text_list;
 
-author : TOKEN_AT TOKEN_AUTHOR TOKEN_DEF text_list; 
+author : TOKEN_AUTHOR text_list; 
 
-date : TOKEN_AT TOKEN_DATE TOKEN_DEF TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER TOKEN_HYPHEN TOKEN_NUMBER;
+date : TOKEN_DATE TOKEN_DATE_FORMAT;
 
-subtitle : TOKEN_AT TOKEN_SUBTITLE TOKEN_DEF text_list; 
+subtitle : TOKEN_SUBTITLE text_list; 
 
-chapter : TOKEN_AT TOKEN_CHAPTER TOKEN_DEF text_list;
+chapter : TOKEN_CHAPTER text_list;
 
-abstract : TOKEN_AT TOKEN_ABSTRACT TOKEN_DEF text_list; 
+abstract : TOKEN_ABSTRACT text_list; 
 
-index : TOKEN_AT TOKEN_INDEX TOKEN_DEF;
+index : TOKEN_INDEX;
 
-paragraph : TOKEN_AT TOKEN_PARAGRAPH TOKEN_DEF text_list; 
+paragraph : TOKEN_PARAGRAPH text_list; 
 
-list : TOKEN_AT TOKEN_LIST TOKEN_DEF text_list;
+list : TOKEN_LIST text_list;
 
-image : TOKEN_AT TOKEN_IMG TOKEN_DEF TOKEN_IMG_PATH; 
+image : TOKEN_IMG TOKEN_IMG_PATH; 
 
-quote : TOKEN_AT TOKEN_QUOTE TOKEN_DEF TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH text_list TOKEN_R_BRACE; 
+quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE; 
 
-foot : TOKEN_AT TOKEN_FOOT TOKEN_DEF text_list;
+foot : TOKEN_FOOT text_list;
 
-table : TOKEN_AT TOKEN_TABLE TOKEN_DEF TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
+table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
 
-diagram : TOKEN_AT TOKEN_DIAGRAM TOKEN_DEF items TOKEN_AT
+diagram : TOKEN_DIAGRAM items TOKEN_AT; 
+
+linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN;
 
 
 
@@ -102,6 +107,10 @@ text_list : text
      ;
 
 text : TOKEN_TEXT
+     | TOKEN_ENTER
+     | TOKEN_AT
+     | TOKEN_COMMA
+     | TOKEN_DEF
      | bold
      | italic
      | underline
@@ -119,7 +128,7 @@ rows : row
      | rows row
      ;
 
-row : TOKEN_L_PAREN text TOKEN_R_PAREN;
+row : TOKEN_L_PAREN text_list TOKEN_R_PAREN;
 
 
 

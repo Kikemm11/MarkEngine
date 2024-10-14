@@ -1,5 +1,5 @@
 @diagram: 
 node1 -> node2 (info)
-node1 -> node3 (info)
+node1 -> node3 
 node3 -> node4 (info)
 @

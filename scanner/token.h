@@ -38,7 +38,11 @@ typedef enum
     TOKEN_IMG = 288,
     TOKEN_QUOTE = 289,
     TOKEN_FOOT = 290,
-    TOKEN_UNDEFINED = 291
+    TOKEN_ENTER = 291,
+    TOKEN_DATE_FORMAT = 292,
+    TOKEN_LINEBREAK = 293,
+    TOKEN_IMG_PATH = 294,
+    TOKEN_UNDEFINED = 295
     }
 token_t;
 
@@ -81,6 +85,10 @@ inline const char* to_str(token_t t)
         case TOKEN_INDEX: return "INDEX";
         case TOKEN_IMG: return "IMG";
         case TOKEN_QUOTE: return "QUOTE";
+        case TOKEN_ENTER: return "ENTER";
+        case TOKEN_DATE_FORMAT: return "DATE_FORMAT";
+        case TOKEN_LINEBREAK: return "LINEBREAK";
         case TOKEN_FOOT: return "FOOT";
+        case TOKEN_IMG_PATH: return "IMG_PATH";
     }
 }
