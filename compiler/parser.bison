@@ -1,6 +1,8 @@
 %{
 #include <stdio.h>
 #include <expression.hpp>
+#include <string>
+#include <vector>
 
 #define YYSTYPE Expression*
 
@@ -9,6 +11,7 @@ extern char* yytext;
 int yyerror(const char*);
 
 Expression* parser_result{nullptr};
+std::vector<std::string> titles = {};
 %}
 
 %token TOKEN_PARAGRAPH
@@ -62,21 +65,21 @@ expr_list : expr                                            {$$ = $1;}
 expr : title                                                {$$ = $1;}
      | author                                               {$$ = $1;}
      | date                                                 {$$ = $1;}
-     | subtitle
-     | chapter
-     | abstract
-     | index
-     | paragraph
-     | list
-     | table
-     | diagram
-     | image
-     | quote
-     | foot
-     | linebreak
+     | subtitle                                             {$$ = $1;}
+     | chapter                                              {$$ = $1;}
+     | abstract                                             {$$ = $1;}
+     | index                                                {$$ = $1;}
+     | paragraph                                            {$$ = $1;}
+     | list                                                 {$$ = $1;}
+     | table                                                {$$ = $1;}
+     | diagram                                              {$$ = $1;}
+     | image                                                {$$ = $1;}
+     | quote                                                {$$ = $1;}
+     | foot                                                 {$$ = $1;}
+     | linebreak                                            {$$ = $1;}
      ;
 
-title : TOKEN_TITLE text_list                               {$$ = new Title($2);}
+title : TOKEN_TITLE text_list                               {$$ = new Title($2, titles);}
       ;                                                
 
 author : TOKEN_AUTHOR text_list                             {$$ = new Author($2);}
@@ -85,31 +88,31 @@ author : TOKEN_AUTHOR text_list                             {$$ = new Author($2)
 date : TOKEN_DATE TOKEN_DATE_FORMAT                         {$$ = new Date(new Text(yytext));}
      ;
 
-subtitle : TOKEN_SUBTITLE text_list
+subtitle : TOKEN_SUBTITLE text_list                         {$$ = new Subtitle($2);}
          ; 
 
-chapter : TOKEN_CHAPTER text_list
+chapter : TOKEN_CHAPTER text_list                           {$$ = new Chapter($2);}
         ;
 
-abstract : TOKEN_ABSTRACT text_list
+abstract : TOKEN_ABSTRACT text_list                         {$$ = new Abstract($2);}
          ; 
 
-index : TOKEN_INDEX
+index : TOKEN_INDEX                                         {$$ = new Index(titles);}
       ;
 
-paragraph : TOKEN_PARAGRAPH text_list
+paragraph : TOKEN_PARAGRAPH text_list                       {$$ = new Paragraph($2);}
           ; 
 
-list : TOKEN_LIST text_list
+list : TOKEN_LIST text_list                                 {$$ = new List($2);}
      ;
 
-image : TOKEN_IMG TOKEN_IMG_PATH
+image : TOKEN_IMG TOKEN_IMG_PATH                                                        
       ; 
 
 quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE
       ; 
 
-foot : TOKEN_FOOT text_list
+foot : TOKEN_FOOT text_list                                 {$$ = new Foot($2);}
      ;
 
 table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
@@ -118,24 +121,28 @@ table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
 diagram : TOKEN_DIAGRAM items TOKEN_AT
         ; 
 
-linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN
+linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN       {$$ = new LineBreak($3);}
           ;
 
 
 
-text_list : text                                  {$$ = new String( new Text(""), $1);}
-     | text_list text                             {$$ = new String( $1, $2);}
+text_list : text                                            {$$ = new String( new Text(""), $1);}
+     | text_list text                                       {$$ = new String( $1, $2);}
      ;
 
-text : TOKEN_TEXT                                 {$$ = new Text(yytext);}
-     | TOKEN_ENTER
-     | TOKEN_AT
-     | TOKEN_COMMA
-     | TOKEN_DEF
+text : TOKEN_TEXT                                           {$$ = new Text(yytext);}
+     | TOKEN_ENTER                                          {$$ = new Text(yytext);}
+     | TOKEN_AT                                             {$$ = new Text(yytext);}
+     | TOKEN_COMMA                                          {$$ = new Text(yytext);}
+     | TOKEN_DEF                                            {$$ = new Text(yytext);}
      | bold
      | italic
      | underline
      ;
+
+
+number : TOKEN_NUMBER                                       {$$ = new Text(yytext);}
+       ;
 
 bold : TOKEN_WILDCARD TOKEN_TEXT TOKEN_WILDCARD;
 

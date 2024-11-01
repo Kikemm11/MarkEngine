@@ -1,3 +1,13 @@
-@title: some title
+@title: some title 1
 @author: some author
-@date: 04-12-2001 @title: some title
+@index:
+@date: 04-12-2001
+@title: some title 2
+@subtitle: some subtitle
+@chapter: some chapter
+@abstract: Some abstract
+@paragraph: Some paragraph:
+@list: element1, element2
+@foot: some footer
+
+@linebreak(5)
