@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
     if (result == 0)
     {
-        printf("Result = %s\n", parser_result->eval().c_str());
+        printf("Result:\n%s\n", parser_result->eval().c_str());
         parser_result->destroy();
     }
     else

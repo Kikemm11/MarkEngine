@@ -56,12 +56,12 @@ program : expr_list                                        {parser_result = $1;}
         ;
 
 expr_list : expr                                            {$$ = $1;}
-          | expr_list expr
+          | expr_list expr                                  {$$ = new ExpressionList($1, $2);}
           ;
 
 expr : title                                                {$$ = $1;}
-     | author
-     | date
+     | author                                               {$$ = $1;}
+     | date                                                 {$$ = $1;}
      | subtitle
      | chapter
      | abstract
@@ -79,33 +79,47 @@ expr : title                                                {$$ = $1;}
 title : TOKEN_TITLE text_list                               {$$ = new Title($2);}
       ;                                                
 
-author : TOKEN_AUTHOR text_list; 
+author : TOKEN_AUTHOR text_list                             {$$ = new Author($2);}
+       ; 
 
-date : TOKEN_DATE TOKEN_DATE_FORMAT;
+date : TOKEN_DATE TOKEN_DATE_FORMAT                         {$$ = new Date(new Text(yytext));}
+     ;
 
-subtitle : TOKEN_SUBTITLE text_list; 
+subtitle : TOKEN_SUBTITLE text_list
+         ; 
 
-chapter : TOKEN_CHAPTER text_list;
+chapter : TOKEN_CHAPTER text_list
+        ;
 
-abstract : TOKEN_ABSTRACT text_list; 
+abstract : TOKEN_ABSTRACT text_list
+         ; 
 
-index : TOKEN_INDEX;
+index : TOKEN_INDEX
+      ;
 
-paragraph : TOKEN_PARAGRAPH text_list; 
+paragraph : TOKEN_PARAGRAPH text_list
+          ; 
 
-list : TOKEN_LIST text_list;
+list : TOKEN_LIST text_list
+     ;
 
-image : TOKEN_IMG TOKEN_IMG_PATH; 
+image : TOKEN_IMG TOKEN_IMG_PATH
+      ; 
 
-quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE; 
+quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE
+      ; 
 
-foot : TOKEN_FOOT text_list;
+foot : TOKEN_FOOT text_list
+     ;
 
-table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
+table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
+      ;
 
-diagram : TOKEN_DIAGRAM items TOKEN_AT; 
+diagram : TOKEN_DIAGRAM items TOKEN_AT
+        ; 
 
-linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN;
+linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN
+          ;
 
 
 

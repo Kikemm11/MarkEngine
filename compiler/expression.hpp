@@ -28,6 +28,34 @@ private:
 };
 
 
+class Author : public Expression
+{
+public:
+    Author(Expression* _author) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string author;
+};
+
+
+class Date : public Expression
+{
+public:
+    Date(Expression* _date) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string date;
+};
+
+
 class Text : public Expression
 {
 public:
@@ -53,5 +81,19 @@ public:
 
 private:
     std::string str;
+
+};
+
+class ExpressionList: public Expression
+{
+public:
+    ExpressionList(Expression* prev_expr, Expression* current_expr) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string concat_expr_list;
 
 };

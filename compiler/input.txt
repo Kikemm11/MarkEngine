@@ -1,1 +1,3 @@
 @title: some title
+@author: some author
+@date: 04-12-2001 @title: some title
