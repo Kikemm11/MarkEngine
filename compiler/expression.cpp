@@ -196,7 +196,6 @@ std::string LineBreak::eval() noexcept
 }
 
 
-
 // Text rule treatment (Raw text and atomic expr for MarkEngine purpose)
 
 Text::Text(std::string _text) noexcept
@@ -207,6 +206,54 @@ void Text::destroy() noexcept {}
 std::string Text::eval() noexcept
 {
     return text;
+}
+
+
+// Bold rule treatment (Raw bold text and atomic expr for MarkEngine purpose)
+
+Bold::Bold(std::string _bold_text) noexcept
+{
+        bold_text = "BOLD " + _bold_text + " BOLD";
+}
+
+
+void Bold::destroy() noexcept {}
+
+std::string Bold::eval() noexcept
+{
+    return bold_text;
+}
+
+
+// Italic rule treatment (Raw italic text and atomic expr for MarkEngine purpose)
+
+Italic::Italic(std::string _italic_text) noexcept
+{
+        italic_text = "ITALIC " + _italic_text + " ITALIC";
+}
+
+
+void Italic::destroy() noexcept {}
+
+std::string Italic::eval() noexcept
+{
+    return italic_text;
+}
+
+
+// Underline rule treatment (Raw underline text and atomic expr for MarkEngine purpose)
+
+Underline::Underline(std::string _underline_text) noexcept
+{
+        underline_text = "UNDERLINE " + _underline_text + " UNDERLINE";
+}
+
+
+void Underline::destroy() noexcept {}
+
+std::string Underline::eval() noexcept
+{
+    return underline_text;
 }
 
 

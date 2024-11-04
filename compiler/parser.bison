@@ -29,8 +29,11 @@ std::vector<std::string> titles = {};
 %token TOKEN_INDEX 
 %token TOKEN_IMG 
 %token TOKEN_QUOTE 
-%token TOKEN_FOOT    
+%token TOKEN_FOOT 
 %token TOKEN_TEXT
+%token TOKEN_BOLD_TEXT
+%token TOKEN_ITALIC_TEXT
+%token TOKEN_UNDERLINE_TEXT   
 %token TOKEN_DEF
 %token TOKEN_L_TAG
 %token TOKEN_R_TAG
@@ -135,21 +138,14 @@ text : TOKEN_TEXT                                           {$$ = new Text(yytex
      | TOKEN_AT                                             {$$ = new Text(yytext);}
      | TOKEN_COMMA                                          {$$ = new Text(yytext);}
      | TOKEN_DEF                                            {$$ = new Text(yytext);}
-     | bold
-     | italic
-     | underline
+     | TOKEN_BOLD_TEXT                                      {$$ = new Bold(yytext);}
+     | TOKEN_ITALIC_TEXT                                    {$$ = new Italic(yytext);}
+     | TOKEN_UNDERLINE_TEXT                                 {$$ = new Underline(yytext);}
      ;
 
 
 number : TOKEN_NUMBER                                       {$$ = new Text(yytext);}
        ;
-
-bold : TOKEN_WILDCARD TOKEN_TEXT TOKEN_WILDCARD;
-
-italic : TOKEN_UNDERSCORE TOKEN_TEXT TOKEN_UNDERSCORE;
-
-underline : TOKEN_WAVE TOKEN_TEXT TOKEN_WAVE;
-
 
 
 rows : row 

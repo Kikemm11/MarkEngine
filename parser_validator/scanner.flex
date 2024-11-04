@@ -5,6 +5,9 @@
 NUMBER      [0-9]+
 IMG_PATH   [a-zA-Z0-9_/]+\.[a-z]+
 DATE_FORMAT [0-9]{2}-[0-9]{2}-[0-9]{4} 
+BOLD_TEXT   \*[a-zA-Z0-9 +¿?&¡!".;]+\*
+ITALIC_TEXT _[a-zA-Z0-9 +¿?&¡!".;]+_
+UNDERLINE_TEXT ~[a-zA-Z0-9 +¿?&¡!".;]+~
 TEXT        [a-zA-Z0-9+¿?&¡!".;]{1}[a-zA-Z0-9 +¿?&¡!".;]*
 LINEBREAK   [\n\r]+
 SPACE       [\t ]+
@@ -52,6 +55,9 @@ UNDEFINED   .
 "*"                { return TOKEN_WILDCARD; }
 "~"                { return TOKEN_WAVE; }
 
+{BOLD_TEXT}        { return TOKEN_BOLD_TEXT; }
+{ITALIC_TEXT}      { return TOKEN_ITALIC_TEXT; }
+{UNDERLINE_TEXT}   { return TOKEN_UNDERLINE_TEXT; }
 {TEXT}             { return TOKEN_TEXT; }
 
 {UNDEFINED}  { printf("Unexpected token '%s'\n",yytext); }

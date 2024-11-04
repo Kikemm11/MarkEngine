@@ -185,13 +185,12 @@ private:
     std::string linebreak;
 };
 
-
 // Text definition
 
 class Text : public Expression
 {
 public:
-    Text(std::string text) noexcept;
+    Text(std::string _text) noexcept;
 
     void destroy() noexcept override;
 
@@ -199,6 +198,51 @@ public:
 
 private:
     std::string text;
+};
+
+// Bold definition
+
+class Bold : public Expression
+{
+public:
+    Bold (std::string _bold_text) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string bold_text;
+};
+
+// Italic definition
+
+class Italic : public Expression
+{
+public:
+    Italic (std::string _italic_text) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string italic_text;
+};
+
+// Underline definition
+
+class Underline : public Expression
+{
+public:
+    Underline (std::string _underline_text) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string underline_text;
 };
 
 // String definition

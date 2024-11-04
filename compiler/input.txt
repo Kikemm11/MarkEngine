@@ -1,8 +1,8 @@
 @title: some title 1
+@title: some title 2
 @author: some author
 @index:
 @date: 04-12-2001
-@title: some title 2
 @subtitle: some subtitle
 @chapter: some chapter
 @abstract: Some abstract
@@ -11,3 +11,7 @@
 @foot: some footer
 
 @linebreak(5)
+
+@title: *Bold title* 
+@title:  _Italic title_
+@title:  ~Underline title~
