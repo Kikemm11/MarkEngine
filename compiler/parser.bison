@@ -109,19 +109,19 @@ paragraph : TOKEN_PARAGRAPH text_list                       {$$ = new Paragraph(
 list : TOKEN_LIST text_list                                 {$$ = new List($2);}
      ;
 
-image : TOKEN_IMG TOKEN_IMG_PATH                                                        
+image : TOKEN_IMG TOKEN_IMG_PATH                            {$$ = new Image(yytext);}                                          
       ; 
 
-quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE
+quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE            {$$ = new Quote($3,$5, $7);}
       ; 
 
-foot : TOKEN_FOOT text_list                                 {$$ = new Foot($2);}
+foot : TOKEN_FOOT text_list                                                     {$$ = new Foot($2);}
      ;
 
-table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
+table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT             {$$ = new Table($3, $5);}        
       ;
 
-diagram : TOKEN_DIAGRAM items TOKEN_AT
+diagram : TOKEN_DIAGRAM items TOKEN_AT                                          {$$ = new Diagram($2);}
         ; 
 
 linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN       {$$ = new LineBreak($3);}
@@ -148,20 +148,21 @@ number : TOKEN_NUMBER                                       {$$ = new Text(yytex
        ;
 
 
-rows : row 
-     | rows row
+rows : row                                                  {$$ = new RowList( new Text(""), $1);}
+     | rows row                                             {$$ = new RowList( $1, $2);}
      ;
 
-row : TOKEN_L_PAREN text_list TOKEN_R_PAREN;
+row : TOKEN_L_PAREN text_list TOKEN_R_PAREN                 {$$ = new Row($2);}
+    ;                                                        
 
 
 
-items : item
-      | items item
+items : item                                                {$$ = new ItemList( new Text(""), $1);}
+      | items item                                          {$$ = new ItemList( $1, $2);}
       ;  
 
-item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
-     | text TOKEN_HYPHEN TOKEN_R_TAG text
+item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN                {$$ = new Item($1, $4, $6);}
+     | text TOKEN_HYPHEN TOKEN_R_TAG text                                                 {$$ = new Item($1, $4, new Text(""));}
      ;
 
 %%

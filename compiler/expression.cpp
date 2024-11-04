@@ -28,7 +28,7 @@ std::string Title::eval() noexcept
 
 Author::Author(Expression* _author) noexcept
 {
-        author = "( Latexxxxx -> " + _author->eval() + " )\n";
+        author = "( Latex -> " + _author->eval() + " )\n";
 }
 
 void Author::destroy() noexcept {}
@@ -141,7 +141,7 @@ std::string Paragraph::eval() noexcept
 
 List::List(Expression* _list) noexcept
 {
-        list = "( Latexxxxx -> " + _list->eval() + " )\n";
+        list = "( Latex -> " + _list->eval() + " )\n";
 
         //elements = this->get_elements(_list->eval());
 }
@@ -166,6 +166,38 @@ std::vector<std::string> List::get_elements(std::string str) noexcept
 }
 
 
+// Image rule treatment
+
+Image::Image(std::string _img_path) noexcept
+{
+        image = "( Latex img path -> " + _img_path + " )\n";
+}
+
+
+void Image::destroy() noexcept {}
+
+std::string Image::eval() noexcept
+{
+    return image;
+}
+
+
+// Quote rule treatment
+
+Quote::Quote(Expression* _quote, Expression* _author, Expression* _year) noexcept
+{
+        quote = "( Latex quote -> quote: " + _quote->eval() + " author: " + _author->eval() + " year: " + _year->eval() + " )\n";
+
+}
+
+void Quote::destroy() noexcept {}
+
+std::string Quote::eval() noexcept
+{
+    return quote;
+}
+
+
 // Foot rule treatment
 
 Foot::Foot(Expression* _foot) noexcept
@@ -178,6 +210,122 @@ void Foot::destroy() noexcept {}
 std::string Foot::eval() noexcept
 {
     return foot;
+}
+
+
+// Row rule treatment
+
+Row::Row(Expression* _row) noexcept
+{
+        row = "( Latex row values -> " + _row->eval() + " )\n";
+
+        //values = this->get_values(_row->eval());
+}
+
+void Row::destroy() noexcept {}
+
+std::string Row::eval() noexcept
+{
+    return row;
+}
+
+std::vector<std::string> Row::get_values(std::string str) noexcept
+{
+    std::vector<std::string> values;
+    int pos = 0;
+    while(pos < str.size()){
+        pos = str.find(",");
+        values.push_back(str.substr(0,pos));
+        str.erase(0,pos+1); 
+    }
+    return values;
+}
+
+
+// RowList rule treatment (Concatenate n number of rows)
+
+RowList::RowList(Expression* old_row, Expression* new_row) noexcept
+{
+    rows = old_row->eval() + new_row->eval();
+}
+
+void RowList::destroy() noexcept {}
+
+std::string RowList::eval() noexcept
+{
+    return rows;
+}
+
+
+// Table rule treatment
+
+Table::Table(Expression* _head, Expression* _rows) noexcept
+{
+        table = "( Latex table ->\n" + _head->eval() + "\n" + _rows->eval() + "\n)\n";
+        //columns = this->get_columns(_head->eval());
+}
+
+void Table::destroy() noexcept {}
+
+std::string Table::eval() noexcept
+{
+    return table;
+}
+
+std::vector<std::string> Table::get_columns(std::string str) noexcept
+{
+    std::vector<std::string> columns;
+    int pos = 0;
+    while(pos < str.size()){
+        pos = str.find(",");
+        columns.push_back(str.substr(0,pos));
+        str.erase(0,pos+1); 
+    }
+    return columns;
+}
+
+// Item rule treatment
+
+Item::Item(Expression* _source, Expression* _target, Expression* _info) noexcept
+{
+        item = "( Latex diagram items -> " + _source->eval() + " connects to " + _target->eval() + " Info: " + _info->eval() + ")\n";
+}
+
+void Item::destroy() noexcept {}
+
+std::string Item::eval() noexcept
+{
+    return item;
+}
+
+
+// ItemList rule treatment (Concatenate n number of rows)
+
+ItemList::ItemList(Expression* old_item, Expression* new_item) noexcept
+{
+    items = old_item->eval() + new_item->eval();
+}
+
+void ItemList::destroy() noexcept {}
+
+std::string ItemList::eval() noexcept
+{
+    return items;
+}
+
+
+// Diagram rule treatment
+
+Diagram::Diagram(Expression* _items) noexcept
+{
+        diagram = "( Latex diagram ->\n" + _items->eval() + "\n)\n";
+}
+
+void Diagram::destroy() noexcept {}
+
+std::string Diagram::eval() noexcept
+{
+    return diagram;
 }
 
 

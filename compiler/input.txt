@@ -9,9 +9,18 @@
 @paragraph: Some paragraph:
 @list: element1, element2
 @foot: some footer
-
 @linebreak(5)
-
 @title: *Bold title* 
 @title:  _Italic title_
 @title:  ~Underline title~
+@img:/example/to/img.jpg
+@quote: {Some quote/Some author/1889}
+@table: <column1,column2>
+    (value1,value2) 
+    (value3,value4)
+@
+@diagram: 
+node1 -> node2 (info1)
+node1 -> node3 
+node3 -> node4 (info2)
+@

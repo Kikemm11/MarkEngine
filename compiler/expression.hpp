@@ -155,6 +155,37 @@ private:
     std::vector<std::string> elements;
 };
 
+// Image definition
+
+class Image : public Expression
+{
+public:
+    Image(std::string _img_path) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string image;
+};
+
+// Quote definition
+
+class Quote : public Expression
+{
+public:
+    Quote(Expression* _quote, Expression* _author, Expression* _year) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string quote;
+};
+
+
 // Foot definition
 
 class Foot : public Expression
@@ -168,6 +199,104 @@ public:
 
 private:
     std::string foot;
+};
+
+// Row definition
+
+class Row : public Expression
+{
+public:
+    Row(Expression* _row) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+    std::vector<std::string> get_values(std::string str) noexcept;
+
+private:
+    std::string row;
+    std::vector<std::string> values;
+};
+
+// RowList definition
+
+class RowList: public Expression
+{
+public:
+    RowList(Expression* old_row, Expression* new_row) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string rows;
+
+};
+
+// Table definition
+
+class Table : public Expression
+{
+public:
+    Table(Expression* _head, Expression* _rows) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+    std::vector<std::string> get_columns(std::string str) noexcept;
+
+private:
+    std::string table;
+    std::vector<std::string> columns;
+};
+
+// Item definition
+
+class Item : public Expression
+{
+public:
+    Item(Expression* _source, Expression* _target, Expression* _info) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string item;
+};
+
+// ItemList definition
+
+class ItemList: public Expression
+{
+public:
+    ItemList(Expression* old_item, Expression* new_item) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string items;
+
+};
+
+// Diagram definition
+
+class Diagram : public Expression
+{
+public:
+    Diagram(Expression* _items) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string diagram;
 };
 
 // LineBreak definition
