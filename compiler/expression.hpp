@@ -314,6 +314,21 @@ private:
     std::string linebreak;
 };
 
+// NewPage definition
+
+class NewPage : public Expression
+{
+public:
+    NewPage() noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string new_page;
+};
+
 // Text definition
 
 class Text : public Expression

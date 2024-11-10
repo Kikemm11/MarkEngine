@@ -33,6 +33,7 @@ UNDEFINED   .
 "@quote:"            {return TOKEN_QUOTE; }
 "@foot:"             {return TOKEN_FOOT; }
 "@linebreak"         {return TOKEN_LINEBREAK; }   
+"@new_page:"         {return TOKEN_NEW_PAGE; }
 "\\\\"              {return TOKEN_ENTER; }
 {DATE_FORMAT}       {return TOKEN_DATE_FORMAT; }
 
