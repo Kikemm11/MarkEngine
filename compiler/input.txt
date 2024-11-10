@@ -1,24 +1,24 @@
 @title: some title 1
 @title: some title 2
 @author: some author
-@index:
 @date: 04-12-2001
 @subtitle: some subtitle
 @chapter: some chapter
 @abstract: Some abstract
 @paragraph: Some paragraph:
-@list: element1, element2
 @foot: some footer
 @linebreak(5)
-@title: *Bold title* 
+@title: *hola* _como estas_ estas
 @title:  _Italic title_
 @title:  ~Underline title~
 @img:/example/to/img.jpg
 @quote: {Some quote/Some author/1889}
-@table: <column1,column2>
+@index:
+@table: <column1,column2> 
     (value1,value2) 
     (value3,value4)
 @
+@list: element1, element2
 @diagram: 
 node1 -> node2 (info1)
 node1 -> node3 

@@ -11,7 +11,7 @@ Expression::~Expression() {}
 
 Title::Title(Expression* _title, std::vector<std::string> &titles) noexcept
 {
-        title = "( Latex -> " + _title->eval() + " )\n";
+        title = "\\title{" + _title->eval() + "}\n\n";
 
         titles.push_back(_title->eval());
 }
@@ -28,7 +28,7 @@ std::string Title::eval() noexcept
 
 Author::Author(Expression* _author) noexcept
 {
-        author = "( Latex -> " + _author->eval() + " )\n";
+        author = "\\author{" + _author->eval() + "}\n\n";
 }
 
 void Author::destroy() noexcept {}
@@ -43,7 +43,7 @@ std::string Author::eval() noexcept
 
 Date::Date(Expression* _date) noexcept
 {
-        date = "( LatexDATE -> " + _date->eval() + " )\n";
+        date = "\\date{" + _date->eval() + "}\n\n";
 }
 
 void Date::destroy() noexcept {}
@@ -58,7 +58,7 @@ std::string Date::eval() noexcept
 
 Subtitle::Subtitle(Expression* _subtitle) noexcept
 {
-        subtitle = "( Latex -> " + _subtitle->eval() + " )\n";
+        subtitle = "\\subsection{" + _subtitle->eval() + "}\n\n";
 }
 
 void Subtitle::destroy() noexcept {}
@@ -73,7 +73,7 @@ std::string Subtitle::eval() noexcept
 
 Chapter::Chapter(Expression* _chapter) noexcept
 {
-        chapter = "( Latex -> " + _chapter->eval() + " )\n";
+        chapter = "\\chapter{" + _chapter->eval() + "}\n\n";
 }
 
 void Chapter::destroy() noexcept {}
@@ -88,7 +88,7 @@ std::string Chapter::eval() noexcept
 
 Abstract::Abstract(Expression* _abstract) noexcept
 {
-        abstract = "( Latex -> " + _abstract->eval() + " )\n";
+        abstract = "\\begin{abstract} \n" + _abstract->eval() + "\n\\end{abstract}\n\n";
 }
 
 void Abstract::destroy() noexcept {}
@@ -126,7 +126,7 @@ std::string Index::eval() noexcept
 
 Paragraph::Paragraph(Expression* _paragraph) noexcept
 {
-        paragraph = "( Latex -> " + _paragraph->eval() + " )\n";
+        paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
 }
 
 void Paragraph::destroy() noexcept {}
@@ -170,7 +170,7 @@ std::vector<std::string> List::get_elements(std::string str) noexcept
 
 Image::Image(std::string _img_path) noexcept
 {
-        image = "( Latex img path -> " + _img_path + " )\n";
+        image = "\\begin{figure}[h] \n\\includegraphics[width=0.5\textwidth]{" + _img_path + "}\n\\end{figure}\n\n";
 }
 
 
@@ -186,9 +186,9 @@ std::string Image::eval() noexcept
 
 Quote::Quote(Expression* _quote, Expression* _author, Expression* _year) noexcept
 {
-        quote = "( Latex quote -> quote: " + _quote->eval() + " author: " + _author->eval() + " year: " + _year->eval() + " )\n";
-
+        quote = "\\begin{quote}\n" + _quote->eval() + "\n\\end{quote}\n\\begin{flushright}\n" + _author->eval() + "\nyear: " + _year->eval() + "\\end{flushright} )\n\n";
 }
+
 
 void Quote::destroy() noexcept {}
 
@@ -202,7 +202,7 @@ std::string Quote::eval() noexcept
 
 Foot::Foot(Expression* _foot) noexcept
 {
-        foot = "( Latex -> " + _foot->eval() + " )\n";
+        foot = "\\footnote{" + _foot->eval() + "}\n\n";
 }
 
 void Foot::destroy() noexcept {}
@@ -333,7 +333,7 @@ std::string Diagram::eval() noexcept
 
 LineBreak::LineBreak(Expression* _linebreak) noexcept
 {
-        linebreak = "( Latex -> " + _linebreak->eval() + " )\n";
+        linebreak = "\\vspace{" + _linebreak->eval() + "}\n\n";
 }
 
 void LineBreak::destroy() noexcept {}
@@ -361,7 +361,7 @@ std::string Text::eval() noexcept
 
 Bold::Bold(std::string _bold_text) noexcept
 {
-        bold_text = "BOLD " + _bold_text + " BOLD";
+        bold_text = "\\textbf{" + _bold_text + " } ";
 }
 
 
@@ -377,7 +377,7 @@ std::string Bold::eval() noexcept
 
 Italic::Italic(std::string _italic_text) noexcept
 {
-        italic_text = "ITALIC " + _italic_text + " ITALIC";
+        italic_text = "\\textit{" + _italic_text + "}";
 }
 
 
@@ -393,7 +393,7 @@ std::string Italic::eval() noexcept
 
 Underline::Underline(std::string _underline_text) noexcept
 {
-        underline_text = "UNDERLINE " + _underline_text + " UNDERLINE";
+        underline_text = "\\underline{" + _underline_text + "}\n\n";
 }
 
 
