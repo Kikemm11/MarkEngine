@@ -44,6 +44,7 @@ int yyerror(const char*);
 %token TOKEN_ENTER
 %token TOKEN_LINEBREAK
 %token TOKEN_DATE_FORMAT
+%token TOKEN_NEW_PAGE
 
 
 %%
@@ -71,6 +72,7 @@ expr : title
      | quote
      | foot
      | linebreak
+     | new_page
      ;
 
 title : TOKEN_TITLE text_list;
@@ -102,6 +104,8 @@ table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
 diagram : TOKEN_DIAGRAM items TOKEN_AT; 
 
 linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN;
+
+new_page : TOKEN_NEW_PAGE;
 
 
 

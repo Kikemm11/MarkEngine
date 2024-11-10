@@ -53,6 +53,7 @@ std::vector<std::string> titles = {};
 %token TOKEN_ENTER
 %token TOKEN_LINEBREAK
 %token TOKEN_DATE_FORMAT
+%token TOKEN_NEW_PAGE
 
 
 %%
@@ -80,6 +81,7 @@ expr : title                                                {$$ = $1;}
      | quote                                                {$$ = $1;}
      | foot                                                 {$$ = $1;}
      | linebreak                                            {$$ = $1;}
+     | new_page                                             {$$ = $1;}          
      ;
 
 title : TOKEN_TITLE text_list                               {$$ = new Title($2, titles);}
@@ -126,6 +128,9 @@ diagram : TOKEN_DIAGRAM items TOKEN_AT                                          
 
 linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN       {$$ = new LineBreak($3);}
           ;
+
+new_page : TOKEN_NEW_PAGE                                             {$$ = new NewPage();}
+         ;
 
 
 

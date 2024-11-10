@@ -58,6 +58,8 @@ column1,column2
 
 )
 ( Latex -> element1,element2 )
+
+
 ( Latex diagram ->
 ( Latex diagram items -> node1  connects to node2  Info: info1)
 ( Latex diagram items -> node1  connects to node3  Info: )

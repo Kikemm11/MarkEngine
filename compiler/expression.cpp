@@ -343,6 +343,20 @@ std::string LineBreak::eval() noexcept
     return linebreak;
 }
 
+// NewPage rule treatment
+
+NewPage::NewPage() noexcept
+{
+        // Here goes the Latex version of New Page
+        new_page = "\n\n";
+}
+
+void NewPage::destroy() noexcept {}
+
+std::string NewPage::eval() noexcept
+{
+    return new_page;
+}
 
 // Text rule treatment (Raw text and atomic expr for MarkEngine purpose)
 

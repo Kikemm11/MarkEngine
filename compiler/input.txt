@@ -19,6 +19,7 @@
     (value3,value4)
 @
 @list: element1, element2
+@new_page:
 @diagram: 
 node1 -> node2 (info1)
 node1 -> node3 
