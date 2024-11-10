@@ -1,6 +1,8 @@
 %{
 #include <stdio.h>
 #include <expression.hpp>
+#include <string>
+#include <vector>
 
 #define YYSTYPE Expression*
 
@@ -9,6 +11,7 @@ extern char* yytext;
 int yyerror(const char*);
 
 Expression* parser_result{nullptr};
+std::vector<std::string> titles = {};
 %}
 
 %token TOKEN_PARAGRAPH
@@ -26,8 +29,11 @@ Expression* parser_result{nullptr};
 %token TOKEN_INDEX 
 %token TOKEN_IMG 
 %token TOKEN_QUOTE 
-%token TOKEN_FOOT    
+%token TOKEN_FOOT 
 %token TOKEN_TEXT
+%token TOKEN_BOLD_TEXT
+%token TOKEN_ITALIC_TEXT
+%token TOKEN_UNDERLINE_TEXT   
 %token TOKEN_DEF
 %token TOKEN_L_TAG
 %token TOKEN_R_TAG
@@ -56,95 +62,107 @@ program : expr_list                                        {parser_result = $1;}
         ;
 
 expr_list : expr                                            {$$ = $1;}
-          | expr_list expr
+          | expr_list expr                                  {$$ = new ExpressionList($1, $2);}
           ;
 
 expr : title                                                {$$ = $1;}
-     | author
-     | date
-     | subtitle
-     | chapter
-     | abstract
-     | index
-     | paragraph
-     | list
-     | table
-     | diagram
-     | image
-     | quote
-     | foot
-     | linebreak
+     | author                                               {$$ = $1;}
+     | date                                                 {$$ = $1;}
+     | subtitle                                             {$$ = $1;}
+     | chapter                                              {$$ = $1;}
+     | abstract                                             {$$ = $1;}
+     | index                                                {$$ = $1;}
+     | paragraph                                            {$$ = $1;}
+     | list                                                 {$$ = $1;}
+     | table                                                {$$ = $1;}
+     | diagram                                              {$$ = $1;}
+     | image                                                {$$ = $1;}
+     | quote                                                {$$ = $1;}
+     | foot                                                 {$$ = $1;}
+     | linebreak                                            {$$ = $1;}
      ;
 
-title : TOKEN_TITLE text_list                               {$$ = new Title($2);}
+title : TOKEN_TITLE text_list                               {$$ = new Title($2, titles);}
       ;                                                
 
-author : TOKEN_AUTHOR text_list; 
+author : TOKEN_AUTHOR text_list                             {$$ = new Author($2);}
+       ; 
 
-date : TOKEN_DATE TOKEN_DATE_FORMAT;
-
-subtitle : TOKEN_SUBTITLE text_list; 
-
-chapter : TOKEN_CHAPTER text_list;
-
-abstract : TOKEN_ABSTRACT text_list; 
-
-index : TOKEN_INDEX;
-
-paragraph : TOKEN_PARAGRAPH text_list; 
-
-list : TOKEN_LIST text_list;
-
-image : TOKEN_IMG TOKEN_IMG_PATH; 
-
-quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH TOKEN_NUMBER TOKEN_R_BRACE; 
-
-foot : TOKEN_FOOT text_list;
-
-table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
-
-diagram : TOKEN_DIAGRAM items TOKEN_AT; 
-
-linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN;
-
-
-
-text_list : text                                  {$$ = new String( new Text(""), $1);}
-     | text_list text                             {$$ = new String( $1, $2);}
+date : TOKEN_DATE TOKEN_DATE_FORMAT                         {$$ = new Date(new Text(yytext));}
      ;
 
-text : TOKEN_TEXT                                 {$$ = new Text(yytext);}
-     | TOKEN_ENTER
-     | TOKEN_AT
-     | TOKEN_COMMA
-     | TOKEN_DEF
-     | bold
-     | italic
-     | underline
+subtitle : TOKEN_SUBTITLE text_list                         {$$ = new Subtitle($2);}
+         ; 
+
+chapter : TOKEN_CHAPTER text_list                           {$$ = new Chapter($2);}
+        ;
+
+abstract : TOKEN_ABSTRACT text_list                         {$$ = new Abstract($2);}
+         ; 
+
+index : TOKEN_INDEX                                         {$$ = new Index(titles);}
+      ;
+
+paragraph : TOKEN_PARAGRAPH text_list                       {$$ = new Paragraph($2);}
+          ; 
+
+list : TOKEN_LIST text_list                                 {$$ = new List($2);}
      ;
 
-bold : TOKEN_WILDCARD TOKEN_TEXT TOKEN_WILDCARD;
+image : TOKEN_IMG TOKEN_IMG_PATH                            {$$ = new Image(yytext);}                                          
+      ; 
 
-italic : TOKEN_UNDERSCORE TOKEN_TEXT TOKEN_UNDERSCORE;
+quote : TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE            {$$ = new Quote($3,$5, $7);}
+      ; 
 
-underline : TOKEN_WAVE TOKEN_TEXT TOKEN_WAVE;
-
-
-
-rows : row 
-     | rows row
+foot : TOKEN_FOOT text_list                                                     {$$ = new Foot($2);}
      ;
 
-row : TOKEN_L_PAREN text_list TOKEN_R_PAREN;
+table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT             {$$ = new Table($3, $5);}        
+      ;
+
+diagram : TOKEN_DIAGRAM items TOKEN_AT                                          {$$ = new Diagram($2);}
+        ; 
+
+linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN       {$$ = new LineBreak($3);}
+          ;
 
 
 
-items : item
-      | items item
+text_list : text                                            {$$ = new String( new Text(""), $1);}
+     | text_list text                                       {$$ = new String( $1, $2);}
+     ;
+
+text : TOKEN_TEXT                                           {$$ = new Text(yytext);}
+     | TOKEN_ENTER                                          {$$ = new Text(yytext);}
+     | TOKEN_AT                                             {$$ = new Text(yytext);}
+     | TOKEN_COMMA                                          {$$ = new Text(yytext);}
+     | TOKEN_DEF                                            {$$ = new Text(yytext);}
+     | TOKEN_BOLD_TEXT                                      {$$ = new Bold(yytext);}
+     | TOKEN_ITALIC_TEXT                                    {$$ = new Italic(yytext);}
+     | TOKEN_UNDERLINE_TEXT                                 {$$ = new Underline(yytext);}
+     ;
+
+
+number : TOKEN_NUMBER                                       {$$ = new Text(yytext);}
+       ;
+
+
+rows : row                                                  {$$ = new RowList( new Text(""), $1);}
+     | rows row                                             {$$ = new RowList( $1, $2);}
+     ;
+
+row : TOKEN_L_PAREN text_list TOKEN_R_PAREN                 {$$ = new Row($2);}
+    ;                                                        
+
+
+
+items : item                                                {$$ = new ItemList( new Text(""), $1);}
+      | items item                                          {$$ = new ItemList( $1, $2);}
       ;  
 
-item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
-     | text TOKEN_HYPHEN TOKEN_R_TAG text
+item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN                {$$ = new Item($1, $4, $6);}
+     | text TOKEN_HYPHEN TOKEN_R_TAG text                                                 {$$ = new Item($1, $4, new Text(""));}
      ;
 
 %%

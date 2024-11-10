@@ -22,6 +22,9 @@ int yyerror(const char*);
 %token TOKEN_QUOTE 
 %token TOKEN_FOOT    
 %token TOKEN_TEXT
+%token TOKEN_BOLD_TEXT
+%token TOKEN_ITALIC_TEXT
+%token TOKEN_UNDERLINE_TEXT   
 %token TOKEN_DEF
 %token TOKEN_L_TAG
 %token TOKEN_R_TAG
@@ -98,7 +101,7 @@ table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
 
 diagram : TOKEN_DIAGRAM items TOKEN_AT; 
 
-linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN TOKEN_NUMBER TOKEN_R_PAREN;
+linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN;
 
 
 
@@ -111,17 +114,13 @@ text : TOKEN_TEXT
      | TOKEN_AT
      | TOKEN_COMMA
      | TOKEN_DEF
-     | bold
-     | italic
-     | underline
+     | TOKEN_BOLD_TEXT 
+     | TOKEN_ITALIC_TEXT
+     | TOKEN_UNDERLINE_TEXT
      ;
 
-bold : TOKEN_WILDCARD TOKEN_TEXT TOKEN_WILDCARD;
 
-italic : TOKEN_UNDERSCORE TOKEN_TEXT TOKEN_UNDERSCORE;
-
-underline : TOKEN_WAVE TOKEN_TEXT TOKEN_WAVE;
-
+number : TOKEN_NUMBER;
 
 
 rows : row 
