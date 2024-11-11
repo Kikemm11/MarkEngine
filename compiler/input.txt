@@ -1,7 +1,9 @@
 @title: some title 1
-@title: some title 2
 @author: some author
 @date: 04-12-2001
+
+@new_page:
+
 @index:
 @subtitle: some subtitle
 @chapter: some chapter
@@ -19,10 +21,5 @@
     (value1,value2) 
     (value3,value4)
 @
-@list: element1, element2
-@new_page:
-@diagram: 
-node1 -> node2 (info1)
-node1 -> node3 
-node3 -> node4 (info2)
-@
+
+

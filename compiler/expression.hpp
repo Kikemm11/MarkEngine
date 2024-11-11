@@ -270,10 +270,12 @@ public:
     std::string eval() noexcept override;
 
     std::vector<std::string> get_columns(std::string str) noexcept;
+    std::vector<std::string> get_rows(std::string str) noexcept;
 
 private:
     std::string table;
     std::vector<std::string> columns;
+    std::vector<std::string> rows;
 };
 
 // Item definition

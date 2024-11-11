@@ -209,7 +209,7 @@ std::vector<std::string> List::get_elements(std::string str) noexcept
 
 Image::Image(std::string _img_path) noexcept
 {
-        image = "\\begin{figure}[h] \n\\includegraphics[width=0.5\textwidth]{" + _img_path + "}\n\\end{figure}\n\n";
+        image = "\\begin{figure}[h] \n\\includegraphics[width=0.5\\textwidth]{" + _img_path + "}\n\\end{figure}\n\n";
 }
 
 
@@ -256,7 +256,7 @@ std::string Foot::eval() noexcept
 
 Row::Row(Expression* _row) noexcept
 {
-        row = "( Latex row values -> " + _row->eval() + " )\n";
+        row =  _row->eval() + " \\\\ \n";
 
         //values = this->get_values(_row->eval());
 }
@@ -300,8 +300,39 @@ std::string RowList::eval() noexcept
 
 Table::Table(Expression* _head, Expression* _rows) noexcept
 {
-        table = "( Latex table ->\n" + _head->eval() + "\n" + _rows->eval() + "\n)\n";
-        //columns = this->get_columns(_head->eval());
+        // columns = this->get_columns(_head->eval());
+        // table = "( Latex table ->\n" + _head->eval() + "\n" + _rows->eval()+ "\n" + columns[0] + " **\n)\n";
+
+        columns = this->get_columns(_head->eval());
+        rows = this->get_columns(_rows->eval());
+
+        table = "\\begin{table}[h]\n\\centering\n";
+        table += "\\begin{tabular}{" + std::string(columns.size(), 'c') + "}\n\\hline\n";
+
+        
+        // table += "Número de columnas: " + std::to_string(columns.size()) + "\\\\ \\hline\n";
+
+        // Agregar los encabezados de las columnas
+        for (size_t i = 0; i < columns.size(); ++i) {
+        table += columns[i];
+            if (i < columns.size() - 1) {
+                table += " & ";
+            }
+        }
+        table += " \\\\ \\hline\n";
+
+    // agregar las filas
+        for (size_t i = 0; i < rows.size(); ++i) {
+        table += rows[i];
+            if (i < rows.size() - 1) {
+                table += " & ";
+            }
+        }
+        table += "\\\\ \\hline\n";
+ 
+
+        table += "\\end{tabular}\n\\caption{Mi tabla de ejemplo}\n\\end{table}\n";
+        
 }
 
 void Table::destroy() noexcept {}
@@ -311,17 +342,72 @@ std::string Table::eval() noexcept
     return table;
 }
 
+// std::vector<std::string> Table::get_columns(std::string str) noexcept
+// {
+//     std::vector<std::string> columns;
+//     int pos = 0;
+//     while(pos < str.size()){
+//         pos = str.find(",");
+//         columns.push_back(str.substr(0,pos));
+//         str.erase(0,pos+1); 
+//     }
+//     return columns;
+// }
+
 std::vector<std::string> Table::get_columns(std::string str) noexcept
 {
     std::vector<std::string> columns;
-    int pos = 0;
-    while(pos < str.size()){
-        pos = str.find(",");
-        columns.push_back(str.substr(0,pos));
-        str.erase(0,pos+1); 
+    size_t pos = 0;
+
+    // Mientras haya comas en la cadena
+    while (pos < str.size()) {
+        size_t next_pos = str.find(",", pos); // Buscar la siguiente coma
+        
+        // Si no encontramos más comas, tomamos la subcadena desde `pos` hasta el final
+        if (next_pos == std::string::npos) {
+            columns.push_back(str.substr(pos)); // Agregar lo restante
+            break; // Salir del ciclo
+        }
+
+        // Si encontramos una coma, agregamos la subcadena desde `pos` hasta `next_pos`
+        columns.push_back(str.substr(pos, next_pos - pos));
+
+        // Actualizamos `pos` para que apunte después de la coma
+        pos = next_pos + 1;
     }
+
     return columns;
 }
+
+
+std::vector<std::string> Table::get_rows(std::string str) noexcept
+{
+    std::vector<std::string> rows;
+    size_t pos = 0;
+
+    // Mientras haya comas en la cadena
+    while (pos < str.size()) {
+        size_t next_pos = str.find(",", pos); // Buscar la siguiente coma
+        
+        // Si no encontramos más comas, tomamos la subcadena desde `pos` hasta el final
+        if (next_pos == std::string::npos) {
+            rows.push_back(str.substr(pos)); // Agregar lo restante
+            break; // Salir del ciclo
+        }
+
+        // Si encontramos una coma, agregamos la subcadena desde `pos` hasta `next_pos`
+        rows.push_back(str.substr(pos, next_pos - pos));
+
+        // Actualizamos `pos` para que apunte después de la coma
+        pos = next_pos + 1;
+    }
+
+    return rows;
+}
+
+
+
+
 
 // Item rule treatment
 
@@ -372,7 +458,7 @@ std::string Diagram::eval() noexcept
 
 LineBreak::LineBreak(Expression* _linebreak) noexcept
 {
-        linebreak = "\\vspace{" + _linebreak->eval() + "}\n\n";
+        linebreak = "\\vspace{" + _linebreak->eval() + "cm}\n\n";
 }
 
 void LineBreak::destroy() noexcept {}
@@ -387,7 +473,7 @@ std::string LineBreak::eval() noexcept
 NewPage::NewPage() noexcept
 {
         // Here goes the Latex version of New Page
-        new_page = "\n\n";
+        new_page = "\\newpage \n\n";
 }
 
 void NewPage::destroy() noexcept {}
