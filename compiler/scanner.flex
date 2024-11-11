@@ -42,6 +42,8 @@ UNDEFINED   .
 "@foot:"             {return TOKEN_FOOT; }
 "@linebreak"         {return TOKEN_LINEBREAK; }   
 "@new_page:"         {return TOKEN_NEW_PAGE; }
+"@begin:"            {return TOKEN_BEGIN; }
+"@end"               {return TOKEN_END; }
 "\\\\"              {return TOKEN_ENTER; }
 {DATE_FORMAT}       {return TOKEN_DATE_FORMAT; }
 

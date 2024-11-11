@@ -17,8 +17,12 @@ Expression::~Expression() {}
 
 // Program rule treatment
 
-Program::Program(Expression* _program, std::vector<std::string> &titles) noexcept
+Program::Program(Expression* _head, Expression* _program, std::vector<std::string> &titles) noexcept
 {
+        // Get program header
+        std::string _head_str = _head->eval();
+
+        //Get program content wether it has index or not
         std::string _program_str = _program->eval();
         int pos = _program_str.find("@index:");
         const int SUBSTRING_SIZE = 7;
@@ -44,6 +48,8 @@ Program::Program(Expression* _program, std::vector<std::string> &titles) noexcep
         {
             program = _program->eval();
         }
+
+        program = "\\documentclass{article}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
 }
 
 void Program::destroy() noexcept {}
@@ -51,6 +57,21 @@ void Program::destroy() noexcept {}
 std::string Program::eval() noexcept
 {
     return program;
+}
+
+
+// Head rule treatment
+
+Head::Head(Expression* _title, Expression* _author, Expression* _date) noexcept
+{
+        head = _title->eval() + _author->eval() + _date->eval();
+}
+
+void Head::destroy() noexcept {}
+
+std::string Head::eval() noexcept
+{
+    return head;
 }
 
 
@@ -165,7 +186,8 @@ std::string Index::eval() noexcept
 
 Paragraph::Paragraph(Expression* _paragraph) noexcept
 {
-        paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
+    //paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
+    paragraph = _paragraph->eval() + "\n";
 }
 
 void Paragraph::destroy() noexcept {}

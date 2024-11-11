@@ -62,22 +62,29 @@ std::vector<std::string> titles = {};
 %token TOKEN_LINEBREAK
 %token TOKEN_DATE_FORMAT
 %token TOKEN_NEW_PAGE
+%token TOKEN_BEGIN
+%token TOKEN_END
 
 
 %%
 
-program : expr_list                                        {parser_result = new Program($1, titles);} 
+program : head TOKEN_BEGIN expr_list TOKEN_END              {parser_result = new Program($1, $3, titles);} 
         |                                                   {parser_result = new Text("");}
         ;
+
+
+head : title author date                                    {$$ = new Head($1, $2, $3);}
+     | title                                                {$$ = new Head($1, new Text(""), new Text(""));}
+     | title author                                         {$$ = new Head($1, $2, new Text(""));}
+     | title date                                           {$$ = new Head($1, new Text(""), $2);}
+     ;
+
 
 expr_list : expr                                            {$$ = $1;}
           | expr_list expr                                  {$$ = new ExpressionList($1, $2);}
           ;
 
-expr : title                                                {$$ = $1;}
-     | author                                               {$$ = $1;}
-     | date                                                 {$$ = $1;}
-     | subtitle                                             {$$ = $1;}
+expr : subtitle                                             {$$ = $1;}
      | chapter                                              {$$ = $1;}
      | abstract                                             {$$ = $1;}
      | index                                                {$$ = $1;}

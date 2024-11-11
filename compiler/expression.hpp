@@ -29,7 +29,7 @@ public:
 class Program : public Expression
 {
 public:
-    Program(Expression* _program, std::vector<std::string> &titles) noexcept;
+    Program(Expression* _head, Expression* _program, std::vector<std::string> &titles) noexcept;
 
     void destroy() noexcept override;
 
@@ -37,6 +37,23 @@ public:
 
 private:
     std::string program;
+
+};
+
+
+// Program Head definition
+
+class Head : public Expression
+{
+public:
+    Head(Expression* _title, Expression* _author, Expression* _date) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string head;
 
 };
 
