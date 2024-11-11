@@ -8,7 +8,13 @@
 \author{some author}
 
 \date{04-12-2001}
-
+( Latext index ->
+some title 1
+some title 2
+\textbf{hola} \textit{como estas} estas
+\textit{Italic title} 
+\underline{Underline title} 
+)
 \subsection{some subtitle}
 
 \chapter{some chapter}
@@ -23,13 +29,11 @@ Some abstract
 
 \vspace{5}
 
-\title{\textbf{*hola* } \textit{_como estas_}estas}
+\title{\textbf{hola} \textit{como estas} estas}
 
-\title{\textit{_Italic title_}}
+\title{\textit{Italic title} }
 
-\title{\underline{~Underline title~}
-
-}
+\title{\underline{Underline title} }
 
 \begin{figure}[h] 
 \includegraphics[width=0.5	extwidth]{/example/to/img.jpg}
@@ -40,17 +44,8 @@ Some quote
 \end{quote}
 \begin{flushright}
 Some author
-year: 1889\end{flushright} )
+year: 1889\end{flushright}
 
-( Latext ->
-some title 1
-some title 2
-\textbf{*hola* } \textit{_como estas_}estas
-\textit{_Italic title_}
-\underline{~Underline title~}
-
-
-)
 ( Latex table ->
 column1,column2
 ( Latex row values -> value1,value2 )

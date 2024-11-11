@@ -1,10 +1,57 @@
-#include <expression.hpp>
+/*
+Authors:
+- Iván Maldonado (Kikemaldonado11@gmail.com)
+- Maria José Vera (nandadevi97816@gmail.com)
 
+Developed at: November 2024
+*/
+
+#include <expression.hpp>
 #include <string>
 
 
 // Expression destructor
 Expression::~Expression() {}
+
+
+
+// Program rule treatment
+
+Program::Program(Expression* _program, std::vector<std::string> &titles) noexcept
+{
+        std::string _program_str = _program->eval();
+        int pos = _program_str.find("@index:");
+        const int SUBSTRING_SIZE = 7;
+
+        if (pos != -1)
+        {
+            std::string pre_string = _program_str.substr(0, pos -1);
+            std::string pos_string = _program_str.substr(pos + SUBSTRING_SIZE, _program_str.size());
+
+            std::string index = "( Latext index ->\n";
+
+            for (auto title : titles)
+            {
+                index = index + title + "\n";
+            }
+
+            index = index + ")\n";
+
+            program = pre_string + index + pos_string;
+
+        }
+        else
+        {
+            program = _program->eval();
+        }
+}
+
+void Program::destroy() noexcept {}
+
+std::string Program::eval() noexcept
+{
+    return program;
+}
 
 
 // Title rule treatment
@@ -103,15 +150,7 @@ std::string Abstract::eval() noexcept
 
 Index::Index(std::vector<std::string> & titles) noexcept
 {
-        index = "( Latext ->\n";
-
-        for (auto title : titles)
-        {
-            index = index + title + "\n";
-        }
-
-        index = index + ")\n";
-
+        index = "@index:";
 }
 
 void Index::destroy() noexcept {}
@@ -186,7 +225,7 @@ std::string Image::eval() noexcept
 
 Quote::Quote(Expression* _quote, Expression* _author, Expression* _year) noexcept
 {
-        quote = "\\begin{quote}\n" + _quote->eval() + "\n\\end{quote}\n\\begin{flushright}\n" + _author->eval() + "\nyear: " + _year->eval() + "\\end{flushright} )\n\n";
+        quote = "\\begin{quote}\n" + _quote->eval() + "\n\\end{quote}\n\\begin{flushright}\n" + _author->eval() + "\nyear: " + _year->eval() + "\\end{flushright}\n\n";
 }
 
 
@@ -375,7 +414,7 @@ std::string Text::eval() noexcept
 
 Bold::Bold(std::string _bold_text) noexcept
 {
-        bold_text = "\\textbf{" + _bold_text + " } ";
+        bold_text = "\\textbf{" + _bold_text.substr(1, _bold_text.size() - 2) + "} ";
 }
 
 
@@ -391,7 +430,7 @@ std::string Bold::eval() noexcept
 
 Italic::Italic(std::string _italic_text) noexcept
 {
-        italic_text = "\\textit{" + _italic_text + "}";
+        italic_text = "\\textit{" + _italic_text.substr(1, _italic_text.size() - 2) + "} ";
 }
 
 
@@ -407,7 +446,7 @@ std::string Italic::eval() noexcept
 
 Underline::Underline(std::string _underline_text) noexcept
 {
-        underline_text = "\\underline{" + _underline_text + "}\n\n";
+        underline_text = "\\underline{" + _underline_text.substr(1, _underline_text.size() - 2) + "} ";
 }
 
 

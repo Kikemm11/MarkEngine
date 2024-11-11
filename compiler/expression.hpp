@@ -1,7 +1,14 @@
+/*
+Authors:
+- Iván Maldonado (Kikemaldonado11@gmail.com)
+- Maria José Vera (nandadevi97816@gmail.com)
+
+Developed at: November 2024
+*/
+
 #pragma once
 
 #include <string>
-
 #include <vector>
 
 // Expression definition
@@ -14,6 +21,22 @@ public:
     virtual void destroy() noexcept = 0;
 
     virtual std::string eval() noexcept = 0;
+
+};
+
+// Main Program definition
+
+class Program : public Expression
+{
+public:
+    Program(Expression* _program, std::vector<std::string> &titles) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string program;
 
 };
 

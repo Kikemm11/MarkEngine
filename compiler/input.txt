@@ -2,6 +2,7 @@
 @title: some title 2
 @author: some author
 @date: 04-12-2001
+@index:
 @subtitle: some subtitle
 @chapter: some chapter
 @abstract: Some abstract
@@ -13,7 +14,7 @@
 @title:  ~Underline title~
 @img:/example/to/img.jpg
 @quote: {Some quote/Some author/1889}
-@index:
+
 @table: <column1,column2> 
     (value1,value2) 
     (value3,value4)
