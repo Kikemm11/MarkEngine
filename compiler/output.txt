@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\begin{document}
+\title{some title 1}
+
+\title{some title 2}
+
+\author{some author}
+
+\date{04-12-2001}
+( Latext index ->
+some title 1
+some title 2
+\textbf{hola} \textit{como estas} estas
+\textit{Italic title} 
+\underline{Underline title} 
+)
+\subsection{some subtitle}
+
+\chapter{some chapter}
+
+\begin{abstract} 
+Some abstract
+\end{abstract}
+
+\paragraph{Some paragraph:}
+
+\footnote{some footer}
+
+\vspace{5}
+
+\title{\textbf{hola} \textit{como estas} estas}
+
+\title{\textit{Italic title} }
+
+\title{\underline{Underline title} }
+
+\begin{figure}[h] 
+\includegraphics[width=0.5	extwidth]{/example/to/img.jpg}
+\end{figure}
+
+\begin{quote}
+Some quote
+\end{quote}
+\begin{flushright}
+Some author
+year: 1889\end{flushright}
+
+( Latex table ->
+column1,column2
+( Latex row values -> value1,value2 )
+( Latex row values -> value3,value4 )
+
+)
+( Latex -> element1,element2 )
+
+
+( Latex diagram ->
+( Latex diagram items -> node1  connects to node2  Info: info1)
+( Latex diagram items -> node1  connects to node3  Info: )
+( Latex diagram items -> node3  connects to node4  Info: info2)
+
+)
+
+\end{document}

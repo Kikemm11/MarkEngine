@@ -1,3 +1,11 @@
+/*
+Authors:
+- Iván Maldonado (Kikemaldonado11@gmail.com)
+- Maria José Vera (nandadevi97816@gmail.com)
+
+Developed at: November 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <expression.hpp>
