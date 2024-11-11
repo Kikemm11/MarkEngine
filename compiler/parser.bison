@@ -58,7 +58,7 @@ std::vector<std::string> titles = {};
 
 %%
 
-program : expr_list                                        {parser_result = $1;} 
+program : expr_list                                        {parser_result = new Program($1, titles);} 
         |
         ;
 

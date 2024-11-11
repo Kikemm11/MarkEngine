@@ -7,6 +7,46 @@
 Expression::~Expression() {}
 
 
+
+// Program rule treatment
+
+Program::Program(Expression* _program, std::vector<std::string> &titles) noexcept
+{
+        std::string _program_str = _program->eval();
+        int pos = _program_str.find("@index:");
+        const int SUBSTRING_SIZE = 7;
+
+        if (pos != -1)
+        {
+            std::string pre_string = _program_str.substr(0, pos -1);
+            std::string pos_string = _program_str.substr(pos + SUBSTRING_SIZE, _program_str.size());
+
+            std::string index = "( Latext index ->\n";
+
+            for (auto title : titles)
+            {
+                index = index + title + "\n";
+            }
+
+            index = index + ")\n";
+
+            program = pre_string + index + pos_string;
+
+        }
+        else
+        {
+            program = _program->eval();
+        }
+}
+
+void Program::destroy() noexcept {}
+
+std::string Program::eval() noexcept
+{
+    return program;
+}
+
+
 // Title rule treatment
 
 Title::Title(Expression* _title, std::vector<std::string> &titles) noexcept
@@ -103,6 +143,7 @@ std::string Abstract::eval() noexcept
 
 Index::Index(std::vector<std::string> & titles) noexcept
 {
+        /*
         index = "( Latext ->\n";
 
         for (auto title : titles)
@@ -111,6 +152,8 @@ Index::Index(std::vector<std::string> & titles) noexcept
         }
 
         index = index + ")\n";
+        */
+        index = "@index:";
 
 }
 
@@ -186,7 +229,7 @@ std::string Image::eval() noexcept
 
 Quote::Quote(Expression* _quote, Expression* _author, Expression* _year) noexcept
 {
-        quote = "\\begin{quote}\n" + _quote->eval() + "\n\\end{quote}\n\\begin{flushright}\n" + _author->eval() + "\nyear: " + _year->eval() + "\\end{flushright} )\n\n";
+        quote = "\\begin{quote}\n" + _quote->eval() + "\n\\end{quote}\n\\begin{flushright}\n" + _author->eval() + "\nyear: " + _year->eval() + "\\end{flushright}\n\n";
 }
 
 
@@ -375,7 +418,7 @@ std::string Text::eval() noexcept
 
 Bold::Bold(std::string _bold_text) noexcept
 {
-        bold_text = "\\textbf{" + _bold_text + " } ";
+        bold_text = "\\textbf{" + _bold_text + "} ";
 }
 
 
@@ -407,7 +450,7 @@ std::string Italic::eval() noexcept
 
 Underline::Underline(std::string _underline_text) noexcept
 {
-        underline_text = "\\underline{" + _underline_text + "}\n\n";
+        underline_text = "\\underline{" + _underline_text + "}";
 }
 
 

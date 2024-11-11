@@ -17,6 +17,22 @@ public:
 
 };
 
+// Main Program definition
+
+class Program : public Expression
+{
+public:
+    Program(Expression* _program, std::vector<std::string> &titles) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string program;
+
+};
+
 // Title definition
 
 class Title : public Expression
