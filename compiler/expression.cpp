@@ -143,18 +143,7 @@ std::string Abstract::eval() noexcept
 
 Index::Index(std::vector<std::string> & titles) noexcept
 {
-        /*
-        index = "( Latext ->\n";
-
-        for (auto title : titles)
-        {
-            index = index + title + "\n";
-        }
-
-        index = index + ")\n";
-        */
         index = "@index:";
-
 }
 
 void Index::destroy() noexcept {}
@@ -418,7 +407,7 @@ std::string Text::eval() noexcept
 
 Bold::Bold(std::string _bold_text) noexcept
 {
-        bold_text = "\\textbf{" + _bold_text + "} ";
+        bold_text = "\\textbf{" + _bold_text.substr(1, _bold_text.size() - 2) + "} ";
 }
 
 
@@ -434,7 +423,7 @@ std::string Bold::eval() noexcept
 
 Italic::Italic(std::string _italic_text) noexcept
 {
-        italic_text = "\\textit{" + _italic_text + "}";
+        italic_text = "\\textit{" + _italic_text.substr(1, _italic_text.size() - 2) + "} ";
 }
 
 
@@ -450,7 +439,7 @@ std::string Italic::eval() noexcept
 
 Underline::Underline(std::string _underline_text) noexcept
 {
-        underline_text = "\\underline{" + _underline_text + "}";
+        underline_text = "\\underline{" + _underline_text.substr(1, _underline_text.size() - 2) + "} ";
 }
 
 
