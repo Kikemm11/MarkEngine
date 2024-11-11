@@ -120,7 +120,7 @@ std::string Subtitle::eval() noexcept
 
 Chapter::Chapter(Expression* _chapter) noexcept
 {
-        chapter = "\\chapter{" + _chapter->eval() + "}\n\n";
+        chapter = "\\section{" + _chapter->eval() + "}\n\n";
 }
 
 void Chapter::destroy() noexcept {}
@@ -257,8 +257,6 @@ std::string Foot::eval() noexcept
 Row::Row(Expression* _row) noexcept
 {
         row =  _row->eval() + " \\\\ \n";
-
-        //values = this->get_values(_row->eval());
 }
 
 void Row::destroy() noexcept {}
@@ -300,9 +298,6 @@ std::string RowList::eval() noexcept
 
 Table::Table(Expression* _head, Expression* _rows) noexcept
 {
-        // columns = this->get_columns(_head->eval());
-        // table = "( Latex table ->\n" + _head->eval() + "\n" + _rows->eval()+ "\n" + columns[0] + " **\n)\n";
-
         columns = this->get_columns(_head->eval());
         rows = this->get_columns(_rows->eval());
 
@@ -310,8 +305,6 @@ Table::Table(Expression* _head, Expression* _rows) noexcept
         table += "\\begin{tabular}{" + std::string(columns.size(), 'c') + "}\n\\hline\n";
 
         
-        // table += "Número de columnas: " + std::to_string(columns.size()) + "\\\\ \\hline\n";
-
         // Agregar los encabezados de las columnas
         for (size_t i = 0; i < columns.size(); ++i) {
         table += columns[i];
@@ -341,18 +334,6 @@ std::string Table::eval() noexcept
 {
     return table;
 }
-
-// std::vector<std::string> Table::get_columns(std::string str) noexcept
-// {
-//     std::vector<std::string> columns;
-//     int pos = 0;
-//     while(pos < str.size()){
-//         pos = str.find(",");
-//         columns.push_back(str.substr(0,pos));
-//         str.erase(0,pos+1); 
-//     }
-//     return columns;
-// }
 
 std::vector<std::string> Table::get_columns(std::string str) noexcept
 {
@@ -472,7 +453,6 @@ std::string LineBreak::eval() noexcept
 
 NewPage::NewPage() noexcept
 {
-        // Here goes the Latex version of New Page
         new_page = "\\newpage \n\n";
 }
 
