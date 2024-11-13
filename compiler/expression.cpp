@@ -17,7 +17,7 @@ Expression::~Expression() {}
 
 // Program rule treatment
 
-Program::Program(Expression* _head, Expression* _program, std::vector<std::string> &chapters) noexcept
+Program::Program(Expression* _head, Expression* _program) noexcept
 {
         // Get program header
         std::string _head_str = _head->eval();
@@ -111,11 +111,9 @@ std::string Subtitle::eval() noexcept
 
 // Chapter rule treatment
 
-Chapter::Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept
+Chapter::Chapter(Expression* _chapter) noexcept
 {
         chapter = "\\section{" + _chapter->eval() + "} \n\n";
-
-        chapters.push_back(_chapter->eval());
 }
 
 void Chapter::destroy() noexcept {}
@@ -376,51 +374,6 @@ std::vector<std::string> Table::get_values(std::string str) noexcept
     }
 
     return values;
-}
-
-
-// Item rule treatment
-
-Item::Item(Expression* _source, Expression* _target, Expression* _info) noexcept
-{
-        item = "( Latex diagram items -> " + _source->eval() + " connects to " + _target->eval() + " Info: " + _info->eval() + ")\n";
-}
-
-void Item::destroy() noexcept {}
-
-std::string Item::eval() noexcept
-{
-    return item;
-}
-
-
-// ItemList rule treatment (Concatenate n number of rows)
-
-ItemList::ItemList(Expression* old_item, Expression* new_item) noexcept
-{
-    items = old_item->eval() + new_item->eval();
-}
-
-void ItemList::destroy() noexcept {}
-
-std::string ItemList::eval() noexcept
-{
-    return items;
-}
-
-
-// Diagram rule treatment
-
-Diagram::Diagram(Expression* _items) noexcept
-{
-        diagram = "( Latex diagram ->\n" + _items->eval() + "\n)\n";
-}
-
-void Diagram::destroy() noexcept {}
-
-std::string Diagram::eval() noexcept
-{
-    return diagram;
 }
 
 
