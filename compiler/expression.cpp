@@ -17,7 +17,7 @@ Expression::~Expression() {}
 
 // Program rule treatment
 
-Program::Program(Expression* _head, Expression* _program, std::vector<std::string> &chapters) noexcept
+Program::Program(Expression* _head, Expression* _program) noexcept
 {
         // Get program header
         std::string _head_str = _head->eval();
@@ -111,11 +111,9 @@ std::string Subtitle::eval() noexcept
 
 // Chapter rule treatment
 
-Chapter::Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept
+Chapter::Chapter(Expression* _chapter) noexcept
 {
         chapter = "\\section{" + _chapter->eval() + "} \n\n";
-
-        chapters.push_back(_chapter->eval());
 }
 
 void Chapter::destroy() noexcept {}

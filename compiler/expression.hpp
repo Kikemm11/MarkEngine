@@ -29,7 +29,7 @@ public:
 class Program : public Expression
 {
 public:
-    Program(Expression* _head, Expression* _program, std::vector<std::string> &chapters) noexcept;
+    Program(Expression* _head, Expression* _program) noexcept;
 
     void destroy() noexcept override;
 
@@ -122,7 +122,7 @@ private:
 class Chapter : public Expression
 {
 public:
-    Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept;
+    Chapter(Expression* _chapter) noexcept;
 
     void destroy() noexcept override;
 

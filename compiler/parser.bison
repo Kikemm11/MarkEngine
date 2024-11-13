@@ -19,7 +19,6 @@ extern char* yytext;
 int yyerror(const char*);
 
 Expression* parser_result{nullptr};
-std::vector<std::string> chapters = {};
 %}
 
 %token TOKEN_PARAGRAPH
@@ -67,7 +66,7 @@ std::vector<std::string> chapters = {};
 
 %%
 
-program : head TOKEN_BEGIN expr_list TOKEN_END              {parser_result = new Program($1, $3, chapters);} 
+program : head TOKEN_BEGIN expr_list TOKEN_END              {parser_result = new Program($1, $3);} 
         |                                                   {parser_result = new Text("");}
         ;
 
@@ -109,7 +108,7 @@ date : TOKEN_DATE TOKEN_DATE_FORMAT                         {$$ = new Date(new T
 subtitle : TOKEN_SUBTITLE text_list                         {$$ = new Subtitle($2);}
          ; 
 
-chapter : TOKEN_CHAPTER text_list                           {$$ = new Chapter($2, chapters);}
+chapter : TOKEN_CHAPTER text_list                           {$$ = new Chapter($2);}
         ;
 
 abstract : TOKEN_ABSTRACT text_list                         {$$ = new Abstract($2);}
