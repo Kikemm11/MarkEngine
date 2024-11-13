@@ -24,7 +24,6 @@ int yyerror(const char*);
 %token TOKEN_LINK
 %token TOKEN_FONT
 %token TOKEN_TABLE
-%token TOKEN_DIAGRAM
 %token TOKEN_INDEX 
 %token TOKEN_IMG 
 %token TOKEN_QUOTE 
@@ -77,7 +76,6 @@ expr : subtitle
      | paragraph
      | list
      | table
-     | diagram
      | image
      | quote
      | foot
@@ -111,8 +109,6 @@ foot : TOKEN_FOOT text_list;
 
 table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT;
 
-diagram : TOKEN_DIAGRAM items TOKEN_AT; 
-
 linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN;
 
 new_page : TOKEN_NEW_PAGE;
@@ -142,16 +138,6 @@ rows : row
      ;
 
 row : TOKEN_L_PAREN text_list TOKEN_R_PAREN;
-
-
-
-items : item
-      | items item
-      ;  
-
-item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN
-     | text TOKEN_HYPHEN TOKEN_R_TAG text
-     ;
 
 %%
 

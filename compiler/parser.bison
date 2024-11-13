@@ -33,7 +33,6 @@ std::vector<std::string> chapters = {};
 %token TOKEN_LINK
 %token TOKEN_FONT
 %token TOKEN_TABLE
-%token TOKEN_DIAGRAM
 %token TOKEN_INDEX 
 %token TOKEN_IMG 
 %token TOKEN_QUOTE 
@@ -91,7 +90,6 @@ expr : subtitle                                             {$$ = $1;}
      | paragraph                                            {$$ = $1;}
      | list                                                 {$$ = $1;}
      | table                                                {$$ = $1;}
-     | diagram                                              {$$ = $1;}
      | image                                                {$$ = $1;}
      | quote                                                {$$ = $1;}
      | foot                                                 {$$ = $1;}
@@ -136,10 +134,7 @@ foot : TOKEN_FOOT text_list                                                     
      ;
 
 table : TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT             {$$ = new Table($3, $5);}        
-      ;
-
-diagram : TOKEN_DIAGRAM items TOKEN_AT                                          {$$ = new Diagram($2);}
-        ; 
+      ; 
 
 linebreak : TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN       {$$ = new LineBreak($3);}
           ;
@@ -174,16 +169,6 @@ rows : row                                                  {$$ = new RowList( n
 
 row : TOKEN_L_PAREN text_list TOKEN_R_PAREN                 {$$ = new Row($2);}
     ;                                                        
-
-
-
-items : item                                                {$$ = new ItemList( new Text(""), $1);}
-      | items item                                          {$$ = new ItemList( $1, $2);}
-      ;  
-
-item : text TOKEN_HYPHEN TOKEN_R_TAG text TOKEN_L_PAREN text TOKEN_R_PAREN                {$$ = new Item($1, $4, $6);}
-     | text TOKEN_HYPHEN TOKEN_R_TAG text                                                 {$$ = new Item($1, $4, new Text(""));}
-     ;
 
 %%
 

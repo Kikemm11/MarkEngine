@@ -379,51 +379,6 @@ std::vector<std::string> Table::get_values(std::string str) noexcept
 }
 
 
-// Item rule treatment
-
-Item::Item(Expression* _source, Expression* _target, Expression* _info) noexcept
-{
-        item = "( Latex diagram items -> " + _source->eval() + " connects to " + _target->eval() + " Info: " + _info->eval() + ")\n";
-}
-
-void Item::destroy() noexcept {}
-
-std::string Item::eval() noexcept
-{
-    return item;
-}
-
-
-// ItemList rule treatment (Concatenate n number of rows)
-
-ItemList::ItemList(Expression* old_item, Expression* new_item) noexcept
-{
-    items = old_item->eval() + new_item->eval();
-}
-
-void ItemList::destroy() noexcept {}
-
-std::string ItemList::eval() noexcept
-{
-    return items;
-}
-
-
-// Diagram rule treatment
-
-Diagram::Diagram(Expression* _items) noexcept
-{
-        diagram = "( Latex diagram ->\n" + _items->eval() + "\n)\n";
-}
-
-void Diagram::destroy() noexcept {}
-
-std::string Diagram::eval() noexcept
-{
-    return diagram;
-}
-
-
 // LineBreak rule treatment
 
 LineBreak::LineBreak(Expression* _linebreak) noexcept

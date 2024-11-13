@@ -44,19 +44,18 @@ typedef enum
     TOKEN_LINK = 286,
     TOKEN_FONT = 287,
     TOKEN_TABLE = 288,
-    TOKEN_DIAGRAM = 289,
-    TOKEN_INDEX = 290,
-    TOKEN_IMG = 291,
-    TOKEN_QUOTE = 292,
-    TOKEN_FOOT = 293,
-    TOKEN_ENTER = 294,
-    TOKEN_DATE_FORMAT = 295,
-    TOKEN_LINEBREAK = 296,
-    TOKEN_IMG_PATH = 297,
-    TOKEN_NEW_PAGE = 298,
-    TOKEN_BEGIN = 299,
-    TOKEN_END = 300,
-    TOKEN_UNDEFINED = 301
+    TOKEN_INDEX = 289,
+    TOKEN_IMG = 290,
+    TOKEN_QUOTE = 291,
+    TOKEN_FOOT = 292,
+    TOKEN_ENTER = 293,
+    TOKEN_DATE_FORMAT = 294,
+    TOKEN_LINEBREAK = 295,
+    TOKEN_IMG_PATH = 296,
+    TOKEN_NEW_PAGE = 297,
+    TOKEN_BEGIN = 298,
+    TOKEN_END = 299,
+    TOKEN_UNDEFINED = 300
     }
 token_t;
 
@@ -98,7 +97,6 @@ inline const char* to_str(token_t t)
         case TOKEN_LINK: return "LINK";
         case TOKEN_FONT: return "FONT";
         case TOKEN_TABLE: return "TABLE";
-        case TOKEN_DIAGRAM: return "DIAGRAM";
         case TOKEN_INDEX: return "INDEX";
         case TOKEN_IMG: return "IMG";
         case TOKEN_QUOTE: return "QUOTE";

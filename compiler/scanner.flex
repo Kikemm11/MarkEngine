@@ -35,7 +35,6 @@ UNDEFINED   .
 "@link:"             {return TOKEN_LINK; }
 "@font:"             {return TOKEN_FONT; }
 "@table:"            {return TOKEN_TABLE; }
-"@diagram:"          {return TOKEN_DIAGRAM; }
 "@index:"            {return TOKEN_INDEX; }
 "@img:"              {return TOKEN_IMG; }
 "@quote:"            {return TOKEN_QUOTE; }

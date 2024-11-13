@@ -295,52 +295,6 @@ private:
     std::vector<std::string> rows;
 };
 
-// Item definition
-
-class Item : public Expression
-{
-public:
-    Item(Expression* _source, Expression* _target, Expression* _info) noexcept;
-
-    void destroy() noexcept override;
-
-    std::string eval() noexcept override;
-
-private:
-    std::string item;
-};
-
-// ItemList definition
-
-class ItemList: public Expression
-{
-public:
-    ItemList(Expression* old_item, Expression* new_item) noexcept;
-
-    void destroy() noexcept override;
-
-    std::string eval() noexcept override;
-
-private:
-    std::string items;
-
-};
-
-// Diagram definition
-
-class Diagram : public Expression
-{
-public:
-    Diagram(Expression* _items) noexcept;
-
-    void destroy() noexcept override;
-
-    std::string eval() noexcept override;
-
-private:
-    std::string diagram;
-};
-
 // LineBreak definition
 
 class LineBreak : public Expression
