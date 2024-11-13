@@ -22,33 +22,7 @@ Program::Program(Expression* _head, Expression* _program, std::vector<std::strin
         // Get program header
         std::string _head_str = _head->eval();
 
-        //Get program content wether it has index or not
-        std::string _program_str = _program->eval();
-        int pos = _program_str.find("@index:");
-        const int SUBSTRING_SIZE = 7;
-
-        if (pos != -1)
-        {
-            std::string pre_string = _program_str.substr(0, pos -1);
-            std::string pos_string = _program_str.substr(pos + SUBSTRING_SIZE, _program_str.size());
-
-            std::string index = "( Latext index ->\n";
-
-            for (auto chapter : chapters)
-            {
-                index = index + chapter + "\n";
-            }
-
-            index = index + ")\n";
-
-            program = pre_string + index + pos_string;
-
-        }
-        else
-        {
-            program = _program->eval();
-        }
-
+        program = _program->eval();
         program = "\\documentclass{article}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
 }
 
@@ -124,7 +98,7 @@ std::string Date::eval() noexcept
 
 Subtitle::Subtitle(Expression* _subtitle) noexcept
 {
-        subtitle = "\\subsection{" + _subtitle->eval() + "}\n\n";
+        subtitle = "\\subsection{" + _subtitle->eval() + "} \n\n";
 }
 
 void Subtitle::destroy() noexcept {}
@@ -139,7 +113,7 @@ std::string Subtitle::eval() noexcept
 
 Chapter::Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept
 {
-        chapter = "\\section{" + _chapter->eval() + "}\n\n";
+        chapter = "\\section{" + _chapter->eval() + "} \n\n";
 
         chapters.push_back(_chapter->eval());
 }
@@ -171,7 +145,7 @@ std::string Abstract::eval() noexcept
 
 Index::Index() noexcept
 {
-        index = "@index:";
+        index = "\\tableofcontents \n\n";
 }
 
 void Index::destroy() noexcept {}
@@ -187,7 +161,7 @@ std::string Index::eval() noexcept
 Paragraph::Paragraph(Expression* _paragraph) noexcept
 {
     //paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
-    paragraph = _paragraph->eval() + "\n";
+    paragraph = _paragraph->eval() + "\n\n";
 }
 
 void Paragraph::destroy() noexcept {}
@@ -202,9 +176,18 @@ std::string Paragraph::eval() noexcept
 
 List::List(Expression* _list) noexcept
 {
-        list = "( Latex -> " + _list->eval() + " )\n";
+    elements = this->get_elements(_list->eval());
 
-        //elements = this->get_elements(_list->eval());
+    list = "\\begin{itemize}\n";
+    
+    // Agregar los encabezados de las columnas
+    for (size_t i = 0; i < elements.size(); ++i) {
+        if (i < elements.size()) {
+            list += "\\item " + elements[i] + "\n";
+        }
+    }
+    list += "\\end{itemize} \n";
+    
 }
 
 void List::destroy() noexcept {}
@@ -216,14 +199,27 @@ std::string List::eval() noexcept
 
 std::vector<std::string> List::get_elements(std::string str) noexcept
 {
-    std::vector<std::string> elements;
-    int pos = 0;
-    while(pos < str.size()){
-        pos = str.find(",");
-        elements.push_back(str.substr(0,pos));
-        str.erase(0,pos+1); 
+    std::vector<std::string> columns;
+    size_t pos = 0;
+
+    // Mientras haya comas en la cadena
+    while (pos < str.size()) {
+        size_t next_pos = str.find(",", pos); // Buscar la siguiente coma
+        
+        // Si no encontramos más comas, tomamos la subcadena desde `pos` hasta el final
+        if (next_pos == std::string::npos) {
+            columns.push_back(str.substr(pos)); // Agregar lo restante
+            break; // Salir del ciclo
+        }
+
+        // Si encontramos una coma, agregamos la subcadena desde `pos` hasta `next_pos`
+        columns.push_back(str.substr(pos, next_pos - pos));
+
+        // Actualizamos `pos` para que apunte después de la coma
+        pos = next_pos + 1;
     }
-    return elements;
+
+    return columns;
 }
 
 
@@ -320,14 +316,14 @@ std::string RowList::eval() noexcept
 
 Table::Table(Expression* _head, Expression* _rows) noexcept
 {
-        columns = this->get_columns(_head->eval());
-        rows = this->get_columns(_rows->eval());
+        columns = this->get_values(_head->eval());
+        rows = this->get_values(_rows->eval());
 
         table = "\\begin{table}[h]\n\\centering\n";
         table += "\\begin{tabular}{" + std::string(columns.size(), 'c') + "}\n\\hline\n";
 
-        
-        // Agregar los encabezados de las columnas
+      
+        // Add the column headers
         for (size_t i = 0; i < columns.size(); ++i) {
         table += columns[i];
             if (i < columns.size() - 1) {
@@ -336,7 +332,7 @@ Table::Table(Expression* _head, Expression* _rows) noexcept
         }
         table += " \\\\ \\hline\n";
 
-    // agregar las filas
+        // Add the rows
         for (size_t i = 0; i < rows.size(); ++i) {
         table += rows[i];
             if (i < rows.size() - 1) {
@@ -346,7 +342,7 @@ Table::Table(Expression* _head, Expression* _rows) noexcept
         table += "\\\\ \\hline\n";
  
 
-        table += "\\end{tabular}\n\\caption{Mi tabla de ejemplo}\n\\end{table}\n";
+        table += "\\end{tabular}\n\\caption{Mi tabla de ejemplo}\n\\end{table} \n\n";
         
 }
 
@@ -357,59 +353,30 @@ std::string Table::eval() noexcept
     return table;
 }
 
-std::vector<std::string> Table::get_columns(std::string str) noexcept
+std::vector<std::string> Table::get_values(std::string str) noexcept
 {
-    std::vector<std::string> columns;
+    std::vector<std::string> values;
     size_t pos = 0;
 
-    // Mientras haya comas en la cadena
+    // While there are commas in the string
     while (pos < str.size()) {
-        size_t next_pos = str.find(",", pos); // Buscar la siguiente coma
+        size_t next_pos = str.find(",", pos); // Find the next comma
         
-        // Si no encontramos más comas, tomamos la subcadena desde `pos` hasta el final
+        // If no more commas are found, take the substring from `pos` to the end
         if (next_pos == std::string::npos) {
-            columns.push_back(str.substr(pos)); // Agregar lo restante
-            break; // Salir del ciclo
+            values.push_back(str.substr(pos)); // Add the remaining part
+            break; // Exit the loop
         }
 
-        // Si encontramos una coma, agregamos la subcadena desde `pos` hasta `next_pos`
-        columns.push_back(str.substr(pos, next_pos - pos));
+        // If a comma is found, add the substring from `pos` to `next_pos`
+        values.push_back(str.substr(pos, next_pos - pos));
 
-        // Actualizamos `pos` para que apunte después de la coma
+        // Update `pos` to point right after the comma
         pos = next_pos + 1;
     }
 
-    return columns;
+    return values;
 }
-
-
-std::vector<std::string> Table::get_rows(std::string str) noexcept
-{
-    std::vector<std::string> rows;
-    size_t pos = 0;
-
-    // Mientras haya comas en la cadena
-    while (pos < str.size()) {
-        size_t next_pos = str.find(",", pos); // Buscar la siguiente coma
-        
-        // Si no encontramos más comas, tomamos la subcadena desde `pos` hasta el final
-        if (next_pos == std::string::npos) {
-            rows.push_back(str.substr(pos)); // Agregar lo restante
-            break; // Salir del ciclo
-        }
-
-        // Si encontramos una coma, agregamos la subcadena desde `pos` hasta `next_pos`
-        rows.push_back(str.substr(pos, next_pos - pos));
-
-        // Actualizamos `pos` para que apunte después de la coma
-        pos = next_pos + 1;
-    }
-
-    return rows;
-}
-
-
-
 
 
 // Item rule treatment
