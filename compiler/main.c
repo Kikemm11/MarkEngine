@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
         fprintf(outputFile, "%s\n", output.c_str());
        
         fclose(outputFile);
-
+    
         int result = system("pdflatex -jobname=output -output-directory=. output.txt");
 
         if (result == -1) {
