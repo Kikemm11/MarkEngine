@@ -29,7 +29,7 @@ public:
 class Program : public Expression
 {
 public:
-    Program(Expression* _program, std::vector<std::string> &titles) noexcept;
+    Program(Expression* _head, Expression* _program, std::vector<std::string> &chapters) noexcept;
 
     void destroy() noexcept override;
 
@@ -40,12 +40,29 @@ private:
 
 };
 
+
+// Program Head definition
+
+class Head : public Expression
+{
+public:
+    Head(Expression* _title, Expression* _author, Expression* _date) noexcept;
+
+    void destroy() noexcept override;
+
+    std::string eval() noexcept override;
+
+private:
+    std::string head;
+
+};
+
 // Title definition
 
 class Title : public Expression
 {
 public:
-    Title(Expression* _title, std::vector<std::string> &titles) noexcept;
+    Title(Expression* _title) noexcept;
 
     void destroy() noexcept override;
 
@@ -105,7 +122,7 @@ private:
 class Chapter : public Expression
 {
 public:
-    Chapter(Expression* _chapter) noexcept;
+    Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept;
 
     void destroy() noexcept override;
 
@@ -135,7 +152,7 @@ private:
 class Index : public Expression
 {
 public:
-    Index(std::vector<std::string> & titles) noexcept;
+    Index() noexcept;
 
     void destroy() noexcept override;
 

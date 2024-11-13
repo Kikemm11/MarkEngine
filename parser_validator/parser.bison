@@ -53,22 +53,24 @@ int yyerror(const char*);
 %token TOKEN_LINEBREAK
 %token TOKEN_DATE_FORMAT
 %token TOKEN_NEW_PAGE
+%token TOKEN_BEGIN
+%token TOKEN_END
 
 
 %%
 
-program : expr_list
+program : head TOKEN_BEGIN expr_list TOKEN_END
         |
         ;
+
+head : title author date
+     ;
 
 expr_list : expr
           | expr_list expr
           ;
 
-expr : title
-     | author
-     | date
-     | subtitle
+expr : subtitle
      | chapter
      | abstract
      | index

@@ -1,4 +1,6 @@
+@begin:
 @title: *Bold title* 
 @title:  _Italic title_
 @title:  ~Underline title~
 @new_page:
+@end

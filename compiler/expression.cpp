@@ -17,8 +17,12 @@ Expression::~Expression() {}
 
 // Program rule treatment
 
-Program::Program(Expression* _program, std::vector<std::string> &titles) noexcept
+Program::Program(Expression* _head, Expression* _program, std::vector<std::string> &chapters) noexcept
 {
+        // Get program header
+        std::string _head_str = _head->eval();
+
+        //Get program content wether it has index or not
         std::string _program_str = _program->eval();
         int pos = _program_str.find("@index:");
         const int SUBSTRING_SIZE = 7;
@@ -30,9 +34,9 @@ Program::Program(Expression* _program, std::vector<std::string> &titles) noexcep
 
             std::string index = "( Latext index ->\n";
 
-            for (auto title : titles)
+            for (auto chapter : chapters)
             {
-                index = index + title + "\n";
+                index = index + chapter + "\n";
             }
 
             index = index + ")\n";
@@ -44,6 +48,8 @@ Program::Program(Expression* _program, std::vector<std::string> &titles) noexcep
         {
             program = _program->eval();
         }
+
+        program = "\\documentclass{article}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
 }
 
 void Program::destroy() noexcept {}
@@ -54,13 +60,26 @@ std::string Program::eval() noexcept
 }
 
 
+// Head rule treatment
+
+Head::Head(Expression* _title, Expression* _author, Expression* _date) noexcept
+{
+        head = _title->eval() + _author->eval() + _date->eval();
+}
+
+void Head::destroy() noexcept {}
+
+std::string Head::eval() noexcept
+{
+    return head;
+}
+
+
 // Title rule treatment
 
-Title::Title(Expression* _title, std::vector<std::string> &titles) noexcept
+Title::Title(Expression* _title) noexcept
 {
         title = "\\title{" + _title->eval() + "}\n\n";
-
-        titles.push_back(_title->eval());
 }
 
 void Title::destroy() noexcept {}
@@ -118,9 +137,11 @@ std::string Subtitle::eval() noexcept
 
 // Chapter rule treatment
 
-Chapter::Chapter(Expression* _chapter) noexcept
+Chapter::Chapter(Expression* _chapter, std::vector<std::string> &chapters) noexcept
 {
         chapter = "\\section{" + _chapter->eval() + "}\n\n";
+
+        chapters.push_back(_chapter->eval());
 }
 
 void Chapter::destroy() noexcept {}
@@ -148,7 +169,7 @@ std::string Abstract::eval() noexcept
 
 // Index rule treatment
 
-Index::Index(std::vector<std::string> & titles) noexcept
+Index::Index() noexcept
 {
         index = "@index:";
 }
@@ -165,7 +186,8 @@ std::string Index::eval() noexcept
 
 Paragraph::Paragraph(Expression* _paragraph) noexcept
 {
-        paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
+    //paragraph = "\\paragraph{" + _paragraph->eval() + "}\n\n";
+    paragraph = _paragraph->eval() + "\n";
 }
 
 void Paragraph::destroy() noexcept {}

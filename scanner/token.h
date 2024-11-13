@@ -54,7 +54,9 @@ typedef enum
     TOKEN_LINEBREAK = 296,
     TOKEN_IMG_PATH = 297,
     TOKEN_NEW_PAGE = 298,
-    TOKEN_UNDEFINED = 299
+    TOKEN_BEGIN = 299,
+    TOKEN_END = 300,
+    TOKEN_UNDEFINED = 301
     }
 token_t;
 
@@ -106,5 +108,7 @@ inline const char* to_str(token_t t)
         case TOKEN_FOOT: return "FOOT";
         case TOKEN_IMG_PATH: return "IMG_PATH";
         case TOKEN_NEW_PAGE: return "NEW_PAGE";
+        case TOKEN_BEGIN: return "BEGIN";
+        case TOKEN_END: return "END";
     }
 }
