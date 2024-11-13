@@ -71,7 +71,7 @@ UNDEFINED   .
 {UNDERLINE_TEXT}   { return TOKEN_UNDERLINE_TEXT; }
 {TEXT}             { return TOKEN_TEXT; }
 
-{UNDEFINED}  { printf("Unexpected token '%s'\n",yytext); }
+{UNDEFINED}        {}
 
 %%
 

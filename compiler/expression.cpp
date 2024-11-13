@@ -22,33 +22,7 @@ Program::Program(Expression* _head, Expression* _program, std::vector<std::strin
         // Get program header
         std::string _head_str = _head->eval();
 
-        //Get program content wether it has index or not
-        std::string _program_str = _program->eval();
-        int pos = _program_str.find("@index:");
-        const int SUBSTRING_SIZE = 7;
-
-        if (pos != -1)
-        {
-            std::string pre_string = _program_str.substr(0, pos -1);
-            std::string pos_string = _program_str.substr(pos + SUBSTRING_SIZE, _program_str.size());
-
-            std::string index = "( Latext index ->\n";
-
-            for (auto chapter : chapters)
-            {
-                index = index + chapter + "\n";
-            }
-
-            index = index + ")\n";
-
-            program = pre_string + index + pos_string;
-
-        }
-        else
-        {
-            program = _program->eval();
-        }
-
+        program = _program->eval();
         program = "\\documentclass{article}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
 }
 

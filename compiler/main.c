@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 
         output = parser_result->eval();  
         
-        printf("%s\n", output.c_str());
+        //printf("%s\n", output.c_str());
 
         FILE* outputFile = fopen("output.txt", "w");
         if (!outputFile)
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
         return 1;
         }
 
-        system("rm output.aux output.log ");
+        system("rm output.aux output.log output.toc");
 
         parser_result->destroy();
     }
