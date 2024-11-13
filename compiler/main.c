@@ -10,7 +10,7 @@ Developed at: November 2024
 #include <stdlib.h>
 #include <unistd.h>
 #include <expression.hpp>
-#include <string>  // Para usar std::string
+#include <string> 
 
 extern FILE* yyin;
 extern int yyparse();
@@ -41,18 +41,13 @@ int main(int argc, char* argv[])
 
     if (result == 0)
     {
-        // Crear la variable donde se almacenará el texto formateado
         std::string output;
 
-
-        output = "\\documentclass{article}\n\n\\begin{document}\n";
-        output += parser_result->eval();  // Agregar el resultado de eval() a la cadena
-        output += "\n\\end{document}";
-
+        output = parser_result->eval();  
+        
         printf("%s\n", output.c_str());
 
-        // Abrir el archivo de salida en modo escritura
-        FILE* outputFile = fopen("output.txt", "w");  // Aquí se guarda en 'output.txt'
+        FILE* outputFile = fopen("output.txt", "w");
         if (!outputFile)
         {
             printf("Error opening file for writing\n");
@@ -62,7 +57,7 @@ int main(int argc, char* argv[])
         fprintf(outputFile, "%s\n", output.c_str());
        
         fclose(outputFile);
-
+    
         int result = system("pdflatex -jobname=output -output-directory=. output.txt");
 
         if (result == -1) {
