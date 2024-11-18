@@ -23,7 +23,7 @@ Program::Program(Expression* _head, Expression* _program) noexcept
         std::string _head_str = _head->eval();
 
         program = _program->eval();
-        program = "\\documentclass{article}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
+        program = "\\documentclass{article}\n\n\\usepackage{graphicx}\n\n" + _head_str + "\\begin{document}\n\\maketitle\n" + program + "\n\\end{document}";
 }
 
 void Program::destroy() noexcept {}
@@ -225,7 +225,7 @@ std::vector<std::string> List::get_elements(std::string str) noexcept
 
 Image::Image(std::string _img_path) noexcept
 {
-        image = "\\begin{figure}[h] \n\\includegraphics[width=0.5\\textwidth]{" + _img_path + "}\n\\end{figure}\n\n";
+        image = "\\begin{figure}[h] \n\\includegraphics[width=0.5\\textwidth]{" + _img_path + "}\n\\centering\n\\end{figure}\n\n";
 }
 
 
