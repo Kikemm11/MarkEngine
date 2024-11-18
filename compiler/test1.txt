@@ -6,15 +6,15 @@
     @new_page:
 
     @abstract: 
-    Quantum computing is a rapidly advancing field that has the potential to revolutionize industries ranging from cryptography 
-    to material science. This paper explores the current state of quantum computing, the underlying principles of quantum mechanics, 
-    and various applications in real world scenarios. Quantum computing is a rapidly advancing field that has the potential to 
-    revolutionize industries ranging from cryptography to material science. This paper explores the current state of quantum computing, 
-    the underlying principles of quantum mechanics, and various applications in real world scenarios.\\\\
-    Quantum computing is a new paradigm in computation that leverages the principles of quantum mechanics to solve problems that 
-    are currently intractable for classical computers. Unlike classical computers, which store information as binary digits bits, 
-    quantum computers use quantum bits qubits that can exist in multiple states simultaneously, allowing them to perform many 
-    calculations in parallel.
+        Quantum computing is a rapidly advancing field that has the potential to revolutionize industries ranging from cryptography 
+        to material science. This paper explores the current state of quantum computing, the underlying principles of quantum mechanics, 
+        and various applications in real world scenarios. Quantum computing is a rapidly advancing field that has the potential to 
+        revolutionize industries ranging from cryptography to material science. This paper explores the current state of quantum computing, 
+        the underlying principles of quantum mechanics, and various applications in real world scenarios.\\\\
+        Quantum computing is a new paradigm in computation that leverages the principles of quantum mechanics to solve problems that 
+        are currently intractable for classical computers. Unlike classical computers, which store information as binary digits bits, 
+        quantum computers use quantum bits qubits that can exist in multiple states simultaneously, allowing them to perform many 
+        calculations in parallel.
     
     @new_page:
 
@@ -26,10 +26,11 @@
 
     @linebreak(2)
     
-    @paragraph: Quantum computing is a new paradigm in computation that leverages the principles of quantum mechanics to solve 
-    problems that are currently intractable for classical computers. Unlike classical computers, which store information as binary 
-    digits bits, quantum computers use quantum bits qubits that can exist in multiple states simultaneously, allowing them to perform 
-    many calculations in parallel.
+    @paragraph:
+        Quantum computing is a new paradigm in computation that leverages the principles of quantum mechanics to solve 
+        problems that are currently intractable for classical computers. Unlike classical computers, which store information as binary 
+        digits bits, quantum computers use quantum bits qubits that can exist in multiple states simultaneously, allowing them to perform 
+        many calculations in parallel.
 
     @linebreak(2)
 

@@ -340,7 +340,7 @@ Table::Table(Expression* _head, Expression* _rows) noexcept
         table += "\\\\ \\hline\n";
  
 
-        table += "\\end{tabular}\n\\caption{Mi tabla de ejemplo}\n\\end{table} \n\n";
+        table += "\\end{tabular}\n\n\\end{table} \n\n";
         
 }
 
