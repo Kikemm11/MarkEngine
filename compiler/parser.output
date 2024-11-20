@@ -1,0 +1,1118 @@
+Terminales no usados en la gramática
+
+    TOKEN_UNDERSCORE
+    TOKEN_HYPHEN
+    TOKEN_WILDCARD
+    TOKEN_WAVE
+
+
+Gramática
+
+    0 $accept: program $end
+
+    1 program: head TOKEN_BEGIN expr_list TOKEN_END
+    2        | ε
+
+    3 head: title author date
+    4     | title
+    5     | title author
+    6     | title date
+
+    7 expr_list: expr
+    8          | expr_list expr
+
+    9 expr: subtitle
+   10     | chapter
+   11     | abstract
+   12     | index
+   13     | paragraph
+   14     | list
+   15     | table
+   16     | image
+   17     | quote
+   18     | foot
+   19     | linebreak
+   20     | new_page
+
+   21 title: TOKEN_TITLE text_list
+
+   22 author: TOKEN_AUTHOR text_list
+
+   23 date: TOKEN_DATE TOKEN_DATE_FORMAT
+
+   24 subtitle: TOKEN_SUBTITLE text_list
+
+   25 chapter: TOKEN_CHAPTER text_list
+
+   26 abstract: TOKEN_ABSTRACT text_list
+
+   27 index: TOKEN_INDEX
+
+   28 paragraph: TOKEN_PARAGRAPH text_list
+
+   29 list: TOKEN_LIST text_list
+
+   30 image: TOKEN_IMG TOKEN_IMG_PATH
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE
+
+   32 foot: TOKEN_FOOT text_list
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
+
+   34 linebreak: TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN
+
+   35 new_page: TOKEN_NEW_PAGE
+
+   36 text_list: text
+   37          | text_list text
+
+   38 text: TOKEN_TEXT
+   39     | TOKEN_ENTER
+   40     | TOKEN_AT
+   41     | TOKEN_COMMA
+   42     | TOKEN_DEF
+   43     | TOKEN_BOLD_TEXT
+   44     | TOKEN_ITALIC_TEXT
+   45     | TOKEN_UNDERLINE_TEXT
+
+   46 number: TOKEN_NUMBER
+
+   47 rows: row
+   48     | rows row
+
+   49 row: TOKEN_L_PAREN text_list TOKEN_R_PAREN
+
+
+Terminales con las reglas donde aparecen
+
+    $end (0) 0
+    error (256)
+    TOKEN_PARAGRAPH (258) 28
+    TOKEN_TITLE (259) 21
+    TOKEN_DATE (260) 23
+    TOKEN_SUBTITLE (261) 24
+    TOKEN_CHAPTER (262) 25
+    TOKEN_ABSTRACT (263) 26
+    TOKEN_AUTHOR (264) 22
+    TOKEN_LIST (265) 29
+    TOKEN_TABLE (266) 33
+    TOKEN_INDEX (267) 27
+    TOKEN_IMG (268) 30
+    TOKEN_QUOTE (269) 31
+    TOKEN_FOOT (270) 32
+    TOKEN_TEXT (271) 38
+    TOKEN_BOLD_TEXT (272) 43
+    TOKEN_ITALIC_TEXT (273) 44
+    TOKEN_UNDERLINE_TEXT (274) 45
+    TOKEN_DEF (275) 42
+    TOKEN_L_TAG (276) 33
+    TOKEN_R_TAG (277) 33
+    TOKEN_L_PAREN (278) 34 49
+    TOKEN_R_PAREN (279) 34 49
+    TOKEN_L_BRACE (280) 31
+    TOKEN_R_BRACE (281) 31
+    TOKEN_NUMBER (282) 46
+    TOKEN_IMG_PATH (283) 30
+    TOKEN_COMMA (284) 41
+    TOKEN_AT (285) 33 40
+    TOKEN_UNDERSCORE (286)
+    TOKEN_HYPHEN (287)
+    TOKEN_SLASH (288) 31
+    TOKEN_WILDCARD (289)
+    TOKEN_WAVE (290)
+    TOKEN_ENTER (291) 39
+    TOKEN_LINEBREAK (292) 34
+    TOKEN_DATE_FORMAT (293) 23
+    TOKEN_NEW_PAGE (294) 35
+    TOKEN_BEGIN (295) 1
+    TOKEN_END (296) 1
+
+
+No terminales con las reglas donde aparecen
+
+    $accept (42)
+        on left: 0
+    program (43)
+        on left: 1 2
+        on right: 0
+    head (44)
+        on left: 3 4 5 6
+        on right: 1
+    expr_list (45)
+        on left: 7 8
+        on right: 1 8
+    expr (46)
+        on left: 9 10 11 12 13 14 15 16 17 18 19 20
+        on right: 7 8
+    title (47)
+        on left: 21
+        on right: 3 4 5 6
+    author (48)
+        on left: 22
+        on right: 3 5
+    date (49)
+        on left: 23
+        on right: 3 6
+    subtitle (50)
+        on left: 24
+        on right: 9
+    chapter (51)
+        on left: 25
+        on right: 10
+    abstract (52)
+        on left: 26
+        on right: 11
+    index (53)
+        on left: 27
+        on right: 12
+    paragraph (54)
+        on left: 28
+        on right: 13
+    list (55)
+        on left: 29
+        on right: 14
+    image (56)
+        on left: 30
+        on right: 16
+    quote (57)
+        on left: 31
+        on right: 17
+    foot (58)
+        on left: 32
+        on right: 18
+    table (59)
+        on left: 33
+        on right: 15
+    linebreak (60)
+        on left: 34
+        on right: 19
+    new_page (61)
+        on left: 35
+        on right: 20
+    text_list (62)
+        on left: 36 37
+        on right: 21 22 24 25 26 28 29 31 32 33 37 49
+    text (63)
+        on left: 38 39 40 41 42 43 44 45
+        on right: 36 37
+    number (64)
+        on left: 46
+        on right: 31 34
+    rows (65)
+        on left: 47 48
+        on right: 33 48
+    row (66)
+        on left: 49
+        on right: 47 48
+
+
+Estado 0
+
+    0 $accept: • program $end
+
+    TOKEN_TITLE  desplazar e ir al estado 1
+
+    $default  reduce usando la regla 2 (program)
+
+    program  ir al estado 2
+    head     ir al estado 3
+    title    ir al estado 4
+
+
+Estado 1
+
+   21 title: TOKEN_TITLE • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 13
+    text       ir al estado 14
+
+
+Estado 2
+
+    0 $accept: program • $end
+
+    $end  desplazar e ir al estado 15
+
+
+Estado 3
+
+    1 program: head • TOKEN_BEGIN expr_list TOKEN_END
+
+    TOKEN_BEGIN  desplazar e ir al estado 16
+
+
+Estado 4
+
+    3 head: title • author date
+    4     | title •
+    5     | title • author
+    6     | title • date
+
+    TOKEN_DATE    desplazar e ir al estado 17
+    TOKEN_AUTHOR  desplazar e ir al estado 18
+
+    $default  reduce usando la regla 4 (head)
+
+    author  ir al estado 19
+    date    ir al estado 20
+
+
+Estado 5
+
+   38 text: TOKEN_TEXT •
+
+    $default  reduce usando la regla 38 (text)
+
+
+Estado 6
+
+   43 text: TOKEN_BOLD_TEXT •
+
+    $default  reduce usando la regla 43 (text)
+
+
+Estado 7
+
+   44 text: TOKEN_ITALIC_TEXT •
+
+    $default  reduce usando la regla 44 (text)
+
+
+Estado 8
+
+   45 text: TOKEN_UNDERLINE_TEXT •
+
+    $default  reduce usando la regla 45 (text)
+
+
+Estado 9
+
+   42 text: TOKEN_DEF •
+
+    $default  reduce usando la regla 42 (text)
+
+
+Estado 10
+
+   41 text: TOKEN_COMMA •
+
+    $default  reduce usando la regla 41 (text)
+
+
+Estado 11
+
+   40 text: TOKEN_AT •
+
+    $default  reduce usando la regla 40 (text)
+
+
+Estado 12
+
+   39 text: TOKEN_ENTER •
+
+    $default  reduce usando la regla 39 (text)
+
+
+Estado 13
+
+   21 title: TOKEN_TITLE text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 21 (title)
+
+    text  ir al estado 21
+
+
+Estado 14
+
+   36 text_list: text •
+
+    $default  reduce usando la regla 36 (text_list)
+
+
+Estado 15
+
+    0 $accept: program $end •
+
+    $default  aceptar
+
+
+Estado 16
+
+    1 program: head TOKEN_BEGIN • expr_list TOKEN_END
+
+    TOKEN_PARAGRAPH  desplazar e ir al estado 22
+    TOKEN_SUBTITLE   desplazar e ir al estado 23
+    TOKEN_CHAPTER    desplazar e ir al estado 24
+    TOKEN_ABSTRACT   desplazar e ir al estado 25
+    TOKEN_LIST       desplazar e ir al estado 26
+    TOKEN_TABLE      desplazar e ir al estado 27
+    TOKEN_INDEX      desplazar e ir al estado 28
+    TOKEN_IMG        desplazar e ir al estado 29
+    TOKEN_QUOTE      desplazar e ir al estado 30
+    TOKEN_FOOT       desplazar e ir al estado 31
+    TOKEN_LINEBREAK  desplazar e ir al estado 32
+    TOKEN_NEW_PAGE   desplazar e ir al estado 33
+
+    expr_list  ir al estado 34
+    expr       ir al estado 35
+    subtitle   ir al estado 36
+    chapter    ir al estado 37
+    abstract   ir al estado 38
+    index      ir al estado 39
+    paragraph  ir al estado 40
+    list       ir al estado 41
+    image      ir al estado 42
+    quote      ir al estado 43
+    foot       ir al estado 44
+    table      ir al estado 45
+    linebreak  ir al estado 46
+    new_page   ir al estado 47
+
+
+Estado 17
+
+   23 date: TOKEN_DATE • TOKEN_DATE_FORMAT
+
+    TOKEN_DATE_FORMAT  desplazar e ir al estado 48
+
+
+Estado 18
+
+   22 author: TOKEN_AUTHOR • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 49
+    text       ir al estado 14
+
+
+Estado 19
+
+    3 head: title author • date
+    5     | title author •
+
+    TOKEN_DATE  desplazar e ir al estado 17
+
+    $default  reduce usando la regla 5 (head)
+
+    date  ir al estado 50
+
+
+Estado 20
+
+    6 head: title date •
+
+    $default  reduce usando la regla 6 (head)
+
+
+Estado 21
+
+   37 text_list: text_list text •
+
+    $default  reduce usando la regla 37 (text_list)
+
+
+Estado 22
+
+   28 paragraph: TOKEN_PARAGRAPH • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 51
+    text       ir al estado 14
+
+
+Estado 23
+
+   24 subtitle: TOKEN_SUBTITLE • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 52
+    text       ir al estado 14
+
+
+Estado 24
+
+   25 chapter: TOKEN_CHAPTER • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 53
+    text       ir al estado 14
+
+
+Estado 25
+
+   26 abstract: TOKEN_ABSTRACT • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 54
+    text       ir al estado 14
+
+
+Estado 26
+
+   29 list: TOKEN_LIST • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 55
+    text       ir al estado 14
+
+
+Estado 27
+
+   33 table: TOKEN_TABLE • TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT
+
+    TOKEN_L_TAG  desplazar e ir al estado 56
+
+
+Estado 28
+
+   27 index: TOKEN_INDEX •
+
+    $default  reduce usando la regla 27 (index)
+
+
+Estado 29
+
+   30 image: TOKEN_IMG • TOKEN_IMG_PATH
+
+    TOKEN_IMG_PATH  desplazar e ir al estado 57
+
+
+Estado 30
+
+   31 quote: TOKEN_QUOTE • TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE
+
+    TOKEN_L_BRACE  desplazar e ir al estado 58
+
+
+Estado 31
+
+   32 foot: TOKEN_FOOT • text_list
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 59
+    text       ir al estado 14
+
+
+Estado 32
+
+   34 linebreak: TOKEN_LINEBREAK • TOKEN_L_PAREN number TOKEN_R_PAREN
+
+    TOKEN_L_PAREN  desplazar e ir al estado 60
+
+
+Estado 33
+
+   35 new_page: TOKEN_NEW_PAGE •
+
+    $default  reduce usando la regla 35 (new_page)
+
+
+Estado 34
+
+    1 program: head TOKEN_BEGIN expr_list • TOKEN_END
+    8 expr_list: expr_list • expr
+
+    TOKEN_PARAGRAPH  desplazar e ir al estado 22
+    TOKEN_SUBTITLE   desplazar e ir al estado 23
+    TOKEN_CHAPTER    desplazar e ir al estado 24
+    TOKEN_ABSTRACT   desplazar e ir al estado 25
+    TOKEN_LIST       desplazar e ir al estado 26
+    TOKEN_TABLE      desplazar e ir al estado 27
+    TOKEN_INDEX      desplazar e ir al estado 28
+    TOKEN_IMG        desplazar e ir al estado 29
+    TOKEN_QUOTE      desplazar e ir al estado 30
+    TOKEN_FOOT       desplazar e ir al estado 31
+    TOKEN_LINEBREAK  desplazar e ir al estado 32
+    TOKEN_NEW_PAGE   desplazar e ir al estado 33
+    TOKEN_END        desplazar e ir al estado 61
+
+    expr       ir al estado 62
+    subtitle   ir al estado 36
+    chapter    ir al estado 37
+    abstract   ir al estado 38
+    index      ir al estado 39
+    paragraph  ir al estado 40
+    list       ir al estado 41
+    image      ir al estado 42
+    quote      ir al estado 43
+    foot       ir al estado 44
+    table      ir al estado 45
+    linebreak  ir al estado 46
+    new_page   ir al estado 47
+
+
+Estado 35
+
+    7 expr_list: expr •
+
+    $default  reduce usando la regla 7 (expr_list)
+
+
+Estado 36
+
+    9 expr: subtitle •
+
+    $default  reduce usando la regla 9 (expr)
+
+
+Estado 37
+
+   10 expr: chapter •
+
+    $default  reduce usando la regla 10 (expr)
+
+
+Estado 38
+
+   11 expr: abstract •
+
+    $default  reduce usando la regla 11 (expr)
+
+
+Estado 39
+
+   12 expr: index •
+
+    $default  reduce usando la regla 12 (expr)
+
+
+Estado 40
+
+   13 expr: paragraph •
+
+    $default  reduce usando la regla 13 (expr)
+
+
+Estado 41
+
+   14 expr: list •
+
+    $default  reduce usando la regla 14 (expr)
+
+
+Estado 42
+
+   16 expr: image •
+
+    $default  reduce usando la regla 16 (expr)
+
+
+Estado 43
+
+   17 expr: quote •
+
+    $default  reduce usando la regla 17 (expr)
+
+
+Estado 44
+
+   18 expr: foot •
+
+    $default  reduce usando la regla 18 (expr)
+
+
+Estado 45
+
+   15 expr: table •
+
+    $default  reduce usando la regla 15 (expr)
+
+
+Estado 46
+
+   19 expr: linebreak •
+
+    $default  reduce usando la regla 19 (expr)
+
+
+Estado 47
+
+   20 expr: new_page •
+
+    $default  reduce usando la regla 20 (expr)
+
+
+Estado 48
+
+   23 date: TOKEN_DATE TOKEN_DATE_FORMAT •
+
+    $default  reduce usando la regla 23 (date)
+
+
+Estado 49
+
+   22 author: TOKEN_AUTHOR text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 22 (author)
+
+    text  ir al estado 21
+
+
+Estado 50
+
+    3 head: title author date •
+
+    $default  reduce usando la regla 3 (head)
+
+
+Estado 51
+
+   28 paragraph: TOKEN_PARAGRAPH text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 28 (paragraph)
+
+    text  ir al estado 21
+
+
+Estado 52
+
+   24 subtitle: TOKEN_SUBTITLE text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 24 (subtitle)
+
+    text  ir al estado 21
+
+
+Estado 53
+
+   25 chapter: TOKEN_CHAPTER text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 25 (chapter)
+
+    text  ir al estado 21
+
+
+Estado 54
+
+   26 abstract: TOKEN_ABSTRACT text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 26 (abstract)
+
+    text  ir al estado 21
+
+
+Estado 55
+
+   29 list: TOKEN_LIST text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 29 (list)
+
+    text  ir al estado 21
+
+
+Estado 56
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG • text_list TOKEN_R_TAG rows TOKEN_AT
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 63
+    text       ir al estado 14
+
+
+Estado 57
+
+   30 image: TOKEN_IMG TOKEN_IMG_PATH •
+
+    $default  reduce usando la regla 30 (image)
+
+
+Estado 58
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE • text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 64
+    text       ir al estado 14
+
+
+Estado 59
+
+   32 foot: TOKEN_FOOT text_list •
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    $default  reduce usando la regla 32 (foot)
+
+    text  ir al estado 21
+
+
+Estado 60
+
+   34 linebreak: TOKEN_LINEBREAK TOKEN_L_PAREN • number TOKEN_R_PAREN
+
+    TOKEN_NUMBER  desplazar e ir al estado 65
+
+    number  ir al estado 66
+
+
+Estado 61
+
+    1 program: head TOKEN_BEGIN expr_list TOKEN_END •
+
+    $default  reduce usando la regla 1 (program)
+
+
+Estado 62
+
+    8 expr_list: expr_list expr •
+
+    $default  reduce usando la regla 8 (expr_list)
+
+
+Estado 63
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG text_list • TOKEN_R_TAG rows TOKEN_AT
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_R_TAG           desplazar e ir al estado 67
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text  ir al estado 21
+
+
+Estado 64
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list • TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_SLASH           desplazar e ir al estado 68
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text  ir al estado 21
+
+
+Estado 65
+
+   46 number: TOKEN_NUMBER •
+
+    $default  reduce usando la regla 46 (number)
+
+
+Estado 66
+
+   34 linebreak: TOKEN_LINEBREAK TOKEN_L_PAREN number • TOKEN_R_PAREN
+
+    TOKEN_R_PAREN  desplazar e ir al estado 69
+
+
+Estado 67
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG • rows TOKEN_AT
+
+    TOKEN_L_PAREN  desplazar e ir al estado 70
+
+    rows  ir al estado 71
+    row   ir al estado 72
+
+
+Estado 68
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH • text_list TOKEN_SLASH number TOKEN_R_BRACE
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 73
+    text       ir al estado 14
+
+
+Estado 69
+
+   34 linebreak: TOKEN_LINEBREAK TOKEN_L_PAREN number TOKEN_R_PAREN •
+
+    $default  reduce usando la regla 34 (linebreak)
+
+
+Estado 70
+
+   49 row: TOKEN_L_PAREN • text_list TOKEN_R_PAREN
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text_list  ir al estado 74
+    text       ir al estado 14
+
+
+Estado 71
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows • TOKEN_AT
+   48 rows: rows • row
+
+    TOKEN_L_PAREN  desplazar e ir al estado 70
+    TOKEN_AT       desplazar e ir al estado 75
+
+    row  ir al estado 76
+
+
+Estado 72
+
+   47 rows: row •
+
+    $default  reduce usando la regla 47 (rows)
+
+
+Estado 73
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list • TOKEN_SLASH number TOKEN_R_BRACE
+   37 text_list: text_list • text
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_SLASH           desplazar e ir al estado 77
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text  ir al estado 21
+
+
+Estado 74
+
+   37 text_list: text_list • text
+   49 row: TOKEN_L_PAREN text_list • TOKEN_R_PAREN
+
+    TOKEN_TEXT            desplazar e ir al estado 5
+    TOKEN_BOLD_TEXT       desplazar e ir al estado 6
+    TOKEN_ITALIC_TEXT     desplazar e ir al estado 7
+    TOKEN_UNDERLINE_TEXT  desplazar e ir al estado 8
+    TOKEN_DEF             desplazar e ir al estado 9
+    TOKEN_R_PAREN         desplazar e ir al estado 78
+    TOKEN_COMMA           desplazar e ir al estado 10
+    TOKEN_AT              desplazar e ir al estado 11
+    TOKEN_ENTER           desplazar e ir al estado 12
+
+    text  ir al estado 21
+
+
+Estado 75
+
+   33 table: TOKEN_TABLE TOKEN_L_TAG text_list TOKEN_R_TAG rows TOKEN_AT •
+
+    $default  reduce usando la regla 33 (table)
+
+
+Estado 76
+
+   48 rows: rows row •
+
+    $default  reduce usando la regla 48 (rows)
+
+
+Estado 77
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH • number TOKEN_R_BRACE
+
+    TOKEN_NUMBER  desplazar e ir al estado 65
+
+    number  ir al estado 79
+
+
+Estado 78
+
+   49 row: TOKEN_L_PAREN text_list TOKEN_R_PAREN •
+
+    $default  reduce usando la regla 49 (row)
+
+
+Estado 79
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number • TOKEN_R_BRACE
+
+    TOKEN_R_BRACE  desplazar e ir al estado 80
+
+
+Estado 80
+
+   31 quote: TOKEN_QUOTE TOKEN_L_BRACE text_list TOKEN_SLASH text_list TOKEN_SLASH number TOKEN_R_BRACE •
+
+    $default  reduce usando la regla 31 (quote)

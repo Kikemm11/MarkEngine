@@ -32,8 +32,6 @@ UNDEFINED   .
 "@abstract:"         {return TOKEN_ABSTRACT; }
 "@author:"           {return TOKEN_AUTHOR; }
 "@list:"             {return TOKEN_LIST; }
-"@link:"             {return TOKEN_LINK; }
-"@font:"             {return TOKEN_FONT; }
 "@table:"            {return TOKEN_TABLE; }
 "@index:"            {return TOKEN_INDEX; }
 "@img:"              {return TOKEN_IMG; }

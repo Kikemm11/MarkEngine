@@ -29,8 +29,6 @@ Expression* parser_result{nullptr};
 %token TOKEN_ABSTRACT
 %token TOKEN_AUTHOR
 %token TOKEN_LIST
-%token TOKEN_LINK
-%token TOKEN_FONT
 %token TOKEN_TABLE
 %token TOKEN_INDEX 
 %token TOKEN_IMG 

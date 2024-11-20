@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
         std::string command = "pdflatex -jobname=" + output_name + " -" + output_name + "-directory=. " + output_name + ".txt";
         int result = system(command.c_str());
 
-         result = system(command.c_str());
+        result = system(command.c_str());
 
 
         if (result == -1) {
