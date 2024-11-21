@@ -113,7 +113,7 @@
     @subtitle: Quantum Technologies in Action
 
     @paragraph:
-        Quantum principles have transcended theory to drive revolutionary technologies. The table below highlights some of these advancements
+        Quantum principles have transcended theory to drive revolutionary technologies. The table below highlights some of these advancements:
 
     @linebreak(1)
 
