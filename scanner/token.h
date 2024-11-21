@@ -32,30 +32,27 @@ typedef enum
     TOKEN_SLASH = 274,
     TOKEN_WILDCARD = 275,
     TOKEN_WAVE = 276,
-    TOKEN_SCAPE = 277,
-    TOKEN_PARAGRAPH = 278,
-    TOKEN_TITLE = 279,
-    TOKEN_DATE = 280,
-    TOKEN_SUBTITLE = 281,
-    TOKEN_CHAPTER = 282,
-    TOKEN_ABSTRACT = 283,
-    TOKEN_AUTHOR = 284,
-    TOKEN_LIST = 285,
-    TOKEN_LINK = 286,
-    TOKEN_FONT = 287,
-    TOKEN_TABLE = 288,
-    TOKEN_INDEX = 289,
-    TOKEN_IMG = 290,
-    TOKEN_QUOTE = 291,
-    TOKEN_FOOT = 292,
-    TOKEN_ENTER = 293,
-    TOKEN_DATE_FORMAT = 294,
-    TOKEN_LINEBREAK = 295,
-    TOKEN_IMG_PATH = 296,
-    TOKEN_NEW_PAGE = 297,
-    TOKEN_BEGIN = 298,
-    TOKEN_END = 299,
-    TOKEN_UNDEFINED = 300
+    TOKEN_PARAGRAPH = 277,
+    TOKEN_TITLE = 278,
+    TOKEN_DATE = 279,
+    TOKEN_SUBTITLE = 280,
+    TOKEN_CHAPTER = 281,
+    TOKEN_ABSTRACT = 282,
+    TOKEN_AUTHOR = 283,
+    TOKEN_LIST = 284,
+    TOKEN_TABLE = 285,
+    TOKEN_INDEX = 286,
+    TOKEN_IMG = 287,
+    TOKEN_QUOTE = 288,
+    TOKEN_FOOT = 289,
+    TOKEN_ENTER = 290,
+    TOKEN_DATE_FORMAT = 291,
+    TOKEN_LINEBREAK = 292,
+    TOKEN_IMG_PATH = 293,
+    TOKEN_NEW_PAGE = 294,
+    TOKEN_BEGIN = 295,
+    TOKEN_END = 296,
+    TOKEN_UNDEFINED = 297
     }
 token_t;
 
@@ -85,7 +82,6 @@ inline const char* to_str(token_t t)
         case TOKEN_SLASH: return "SLASH";
         case TOKEN_WAVE: return "WAVE";        
         case TOKEN_WILDCARD: return "WILDCARD";
-        case TOKEN_SCAPE: return "SCAPE";
         case TOKEN_PARAGRAPH: return "PARAGRAPH";
         case TOKEN_TITLE: return "TITLE";
         case TOKEN_DATE: return "DATE";
@@ -94,8 +90,6 @@ inline const char* to_str(token_t t)
         case TOKEN_ABSTRACT: return "ABSTRACT";
         case TOKEN_AUTHOR: return "AUTHOR";
         case TOKEN_LIST: return "LIST";
-        case TOKEN_LINK: return "LINK";
-        case TOKEN_FONT: return "FONT";
         case TOKEN_TABLE: return "TABLE";
         case TOKEN_INDEX: return "INDEX";
         case TOKEN_IMG: return "IMG";

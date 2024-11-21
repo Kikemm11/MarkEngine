@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
         // Create output file
 
-        FILE* outputFile = fopen((output_name + ".txt").c_str(), "w");
+        FILE* outputFile = fopen((output_name + "_output.txt").c_str(), "w");
         if (!outputFile)
         {
             printf("Error opening file for writing\n");
@@ -80,10 +80,10 @@ int main(int argc, char* argv[])
     
         // Use pdflatex to generate a pdf from the output file
 
-        std::string command = "pdflatex -jobname=" + output_name + " -" + output_name + "-directory=. " + output_name + ".txt";
+        std::string command = "pdflatex -jobname=" + output_name + " -" + output_name + "-directory=. " + output_name + "_output.txt";
         int result = system(command.c_str());
 
-         result = system(command.c_str());
+        result = system(command.c_str());
 
 
         if (result == -1) {
