@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+
+\title{some title}
+
+\author{some author}
+
+\date{04-12-2001}
+
+\begin{document}
+\maketitle
+\newpage 
+
+\subsection{some subtitle} 
+
+\section{some chapter} 
+
+\begin{abstract} 
+some text
+\end{abstract}
+
+\tableofcontents 
+
+some subtitle
+
+\begin{itemize}
+\item some text1
+\item some text2
+\end{itemize} 
+\footnote{some text}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cc}
+\hline
+column1 & column2 \\ \hline
+value1 & value2 \\ 
+value3 & value4 \\ 
+\\ \hline
+\end{tabular}
+
+\end{table} 
+
+\begin{figure}[h] 
+\includegraphics[width=0.5\textwidth]{images/image2.jpeg}
+\centering
+\end{figure}
+
+\begin{quote}
+"some quote."
+\end{quote}
+\begin{flushright}
+Niels Bohr
+year: 1927\end{flushright}
+
+
+\end{document}

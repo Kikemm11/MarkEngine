@@ -1,0 +1,31 @@
+@title: some title
+@author: some author
+@date: 04-12-2001
+
+@begin:
+
+@new_page:
+
+@subtitle: some subtitle
+
+@chapter: some chapter
+
+@abstract: some text
+
+@index:
+
+@paragraph: some subtitle
+
+@list: some text1, some text2
+
+@foot: some text
+
+@table: <column1,column2>
+(value1,value2)
+(value3,value4)
+@
+
+@img:images/image2.jpeg
+
+@quote:{"some quote."/ Niels Bohr/ 1927}
+@end
