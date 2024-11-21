@@ -78,7 +78,7 @@
 
     @linebreak(1)
 
-    @quote: {"If quantum mechanics hasnt profoundly shocked you, you havent understood it yet."/ Niels Bohr/ 1927}
+    @quote:{"If quantum mechanics hasnt profoundly shocked you, you havent understood it yet."/ Niels Bohr/ 1927}
 
     @linebreak(1)
 
